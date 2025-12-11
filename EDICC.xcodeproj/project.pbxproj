@@ -1,0 +1,568 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		023753A10971410ACC3E19FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44FC3816527394D20EAD078 /* Preview Assets.xcassets */; };
+		2AD63DF265F349D74A0710A6 /* EDICCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */; };
+		2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */; };
+		5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */; };
+		71952B550F2066EEE89F8D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26360919DCFD0EDCB5C6D738 /* Assets.xcassets */; };
+		791DE45860F7C3158F4AB39F /* TuistAssets+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F36E66CBC4FD77832074 /* TuistAssets+EDICC.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		319917655617BAEAB180C928 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7E011DC9F6A2FF6CC569F2F8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC1C18845D50EA53FA8F5CEC;
+			remoteInfo = EDICC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4193DBBD39CBB3031537D475 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		42CDB804567B12FE845538F0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		26360919DCFD0EDCB5C6D738 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4BA4AB95BF5AAC1CC7AA3ADD /* EDICCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EDICCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		69F2F36E66CBC4FD77832074 /* TuistAssets+EDICC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistAssets+EDICC.swift"; sourceTree = "<group>"; };
+		73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCTests.swift; sourceTree = "<group>"; };
+		7CB401258A4C4D162AAEA41C /* EDICC-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EDICC-Info.plist"; sourceTree = "<group>"; };
+		84696FE3A124C79D72945A13 /* EDICCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EDICCTests-Info.plist"; sourceTree = "<group>"; };
+		A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCApp.swift; sourceTree = "<group>"; };
+		B44FC3816527394D20EAD078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+EDICC.swift"; sourceTree = "<group>"; };
+		E0AA67CA67B986598A751745 /* EDICC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDICC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BF5794C52EEAE84E004DB46A /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
+		BF5794CC2EEAE855004DB46A /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3D5F7C1CEC3DB5CC40A891BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		629E7838DB40E634C9EA8EA5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3F8627794A841ED3A300941B /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				69F2F36E66CBC4FD77832074 /* TuistAssets+EDICC.swift */,
+				D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		540A0C83F7B7DC1BB80786C1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B52176D11F7531728EF67B0E /* Preview Content */,
+				26360919DCFD0EDCB5C6D738 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5E90BE0A2A7D90EE43CE0DD9 /* EDICC */ = {
+			isa = PBXGroup;
+			children = (
+				540A0C83F7B7DC1BB80786C1 /* Resources */,
+				6FF4FE2F842F7E8147C166DD /* Sources */,
+				952070251FFB9ACAA136BCD4 /* Tests */,
+			);
+			path = EDICC;
+			sourceTree = "<group>";
+		};
+		6FC6F9569FC6A67FFB574D4F /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				8321EE3BF3A2886A2683F56F /* Derived */,
+				5E90BE0A2A7D90EE43CE0DD9 /* EDICC */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		6FF4FE2F842F7E8147C166DD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				BF5794CC2EEAE855004DB46A /* Utils */,
+				BF5794C52EEAE84E004DB46A /* View */,
+				A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		8321EE3BF3A2886A2683F56F /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				C5AD376C5062382E646460C5 /* InfoPlists */,
+				3F8627794A841ED3A300941B /* Sources */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
+		952070251FFB9ACAA136BCD4 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		B52176D11F7531728EF67B0E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				B44FC3816527394D20EAD078 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C0324E316A2FAB10EEB84A4C = {
+			isa = PBXGroup;
+			children = (
+				6FC6F9569FC6A67FFB574D4F /* Project */,
+				C2BE472BDAC040E2E423ACD2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2BE472BDAC040E2E423ACD2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E0AA67CA67B986598A751745 /* EDICC.app */,
+				4BA4AB95BF5AAC1CC7AA3ADD /* EDICCTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C5AD376C5062382E646460C5 /* InfoPlists */ = {
+			isa = PBXGroup;
+			children = (
+				7CB401258A4C4D162AAEA41C /* EDICC-Info.plist */,
+				84696FE3A124C79D72945A13 /* EDICCTests-Info.plist */,
+			);
+			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5F73F1A31F6C25107B13374 /* EDICCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFD9DC2CC7852D8C7B379F26 /* Build configuration list for PBXNativeTarget "EDICCTests" */;
+			buildPhases = (
+				1C5D2019DF3C307CA6C6EB97 /* Sources */,
+				884094636FF4D576C8FCD9E5 /* Resources */,
+				629E7838DB40E634C9EA8EA5 /* Frameworks */,
+				4193DBBD39CBB3031537D475 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D5F538F7448DE450C1D03AB /* PBXTargetDependency */,
+			);
+			name = EDICCTests;
+			packageProductDependencies = (
+			);
+			productName = EDICCTests;
+			productReference = 4BA4AB95BF5AAC1CC7AA3ADD /* EDICCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BC1C18845D50EA53FA8F5CEC /* EDICC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D0ACF252549DB8A3CE3332C /* Build configuration list for PBXNativeTarget "EDICC" */;
+			buildPhases = (
+				9FD94F241EB8F3CADFCA80DD /* Sources */,
+				A83EEFB2D958C354B10FB2D7 /* Resources */,
+				3D5F7C1CEC3DB5CC40A891BC /* Frameworks */,
+				42CDB804567B12FE845538F0 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BF5794C52EEAE84E004DB46A /* View */,
+				BF5794CC2EEAE855004DB46A /* Utils */,
+			);
+			name = EDICC;
+			packageProductDependencies = (
+			);
+			productName = EDICC;
+			productReference = E0AA67CA67B986598A751745 /* EDICC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7E011DC9F6A2FF6CC569F2F8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				TargetAttributes = {
+					A5F73F1A31F6C25107B13374 = {
+						TestTargetID = BC1C18845D50EA53FA8F5CEC;
+					};
+				};
+			};
+			buildConfigurationList = 9EC32550FE918142CF7ECA3E /* Build configuration list for PBXProject "EDICC" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = C0324E316A2FAB10EEB84A4C;
+			productRefGroup = C2BE472BDAC040E2E423ACD2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BC1C18845D50EA53FA8F5CEC /* EDICC */,
+				A5F73F1A31F6C25107B13374 /* EDICCTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		884094636FF4D576C8FCD9E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A83EEFB2D958C354B10FB2D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				71952B550F2066EEE89F8D6C /* Assets.xcassets in Resources */,
+				023753A10971410ACC3E19FD /* Preview Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1C5D2019DF3C307CA6C6EB97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2AD63DF265F349D74A0710A6 /* EDICCTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FD94F241EB8F3CADFCA80DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				791DE45860F7C3158F4AB39F /* TuistAssets+EDICC.swift in Sources */,
+				5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */,
+				2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3D5F538F7448DE450C1D03AB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EDICC;
+			target = BC1C18845D50EA53FA8F5CEC /* EDICC */;
+			targetProxy = 319917655617BAEAB180C928 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		6DBFB854002BEFF821BCC34E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/EDICC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.EDICC;
+				PRODUCT_NAME = EDICC;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7B6484D7914AB13E38022E16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "Derived/InfoPlists/EDICC-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.EDICC;
+				PRODUCT_NAME = EDICC;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		817D065DEBEB65F872E88D8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Derived/InfoPlists/EDICCTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.EDICCTests;
+				PRODUCT_NAME = EDICCTests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EDICC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EDICC";
+				TEST_TARGET_NAME = EDICC;
+			};
+			name = Release;
+		};
+		AE3C6432C41473066D5BE0AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		C208A12F5CDABF40385E501A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = "Derived/InfoPlists/EDICCTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.tuist.EDICCTests;
+				PRODUCT_NAME = EDICCTests;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EDICC.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EDICC";
+				TEST_TARGET_NAME = EDICC;
+			};
+			name = Debug;
+		};
+		CA530DFBF61C597AE03A0DF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D0ACF252549DB8A3CE3332C /* Build configuration list for PBXNativeTarget "EDICC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6DBFB854002BEFF821BCC34E /* Debug */,
+				7B6484D7914AB13E38022E16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9EC32550FE918142CF7ECA3E /* Build configuration list for PBXProject "EDICC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE3C6432C41473066D5BE0AD /* Debug */,
+				CA530DFBF61C597AE03A0DF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFD9DC2CC7852D8C7B379F26 /* Build configuration list for PBXNativeTarget "EDICCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C208A12F5CDABF40385E501A /* Debug */,
+				817D065DEBEB65F872E88D8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7E011DC9F6A2FF6CC569F2F8 /* Project object */;
+}
