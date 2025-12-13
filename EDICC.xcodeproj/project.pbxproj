@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		023753A10971410ACC3E19FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44FC3816527394D20EAD078 /* Preview Assets.xcassets */; };
+		24D89CA0D280C726056614A6 /* HexagonBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E8262289A37BAB88CF1951 /* HexagonBackgroundView.swift */; };
+		2904EABBE6860BDF3280F084 /* UIColor + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */; };
 		2AD63DF265F349D74A0710A6 /* EDICCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */; };
 		2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */; };
+		3BA88DE5FD8BAA66657566AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880208C83A993CE1AFDD058C /* ContentView.swift */; };
+		3BEB56B1879C505F50AA774B /* HexagonChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D8FD43FF3EFB454F259BB /* HexagonChartView.swift */; };
 		5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */; };
 		71952B550F2066EEE89F8D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26360919DCFD0EDCB5C6D738 /* Assets.xcassets */; };
 		791DE45860F7C3158F4AB39F /* TuistAssets+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F36E66CBC4FD77832074 /* TuistAssets+EDICC.swift */; };
@@ -55,15 +59,18 @@
 		73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCTests.swift; sourceTree = "<group>"; };
 		7CB401258A4C4D162AAEA41C /* EDICC-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EDICC-Info.plist"; sourceTree = "<group>"; };
 		84696FE3A124C79D72945A13 /* EDICCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EDICCTests-Info.plist"; sourceTree = "<group>"; };
+		880208C83A993CE1AFDD058C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extensions.swift"; sourceTree = "<group>"; };
 		A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCApp.swift; sourceTree = "<group>"; };
 		B44FC3816527394D20EAD078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C02D8FD43FF3EFB454F259BB /* HexagonChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonChartView.swift; sourceTree = "<group>"; };
 		D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+EDICC.swift"; sourceTree = "<group>"; };
 		E0AA67CA67B986598A751745 /* EDICC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDICC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F3E8262289A37BAB88CF1951 /* HexagonBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonBackgroundView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		BF5794C52EEAE84E004DB46A /* View */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = View; sourceTree = "<group>"; };
-		BF5794CC2EEAE855004DB46A /* Utils */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Utils; sourceTree = "<group>"; };
+		BF164F5F2EEC02BC00A7108D /* Path */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Path; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +91,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		154171B6022D3BD83CCCD6B7 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				D82574B350E489D4F3209385 /* Hexagon */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		3F8627794A841ED3A300941B /* Sources */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,8 +139,8 @@
 		6FF4FE2F842F7E8147C166DD /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				BF5794CC2EEAE855004DB46A /* Utils */,
-				BF5794C52EEAE84E004DB46A /* View */,
+				A117B479EA268DD1F070FDA8 /* Utils */,
+				FF61D22A254B18F8877746BC /* View */,
 				A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */,
 			);
 			path = Sources;
@@ -146,6 +161,15 @@
 				73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		A117B479EA268DD1F070FDA8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BF164F5F2EEC02BC00A7108D /* Path */,
+				8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		B52176D11F7531728EF67B0E /* Preview Content */ = {
@@ -180,6 +204,24 @@
 				84696FE3A124C79D72945A13 /* EDICCTests-Info.plist */,
 			);
 			path = InfoPlists;
+			sourceTree = "<group>";
+		};
+		D82574B350E489D4F3209385 /* Hexagon */ = {
+			isa = PBXGroup;
+			children = (
+				F3E8262289A37BAB88CF1951 /* HexagonBackgroundView.swift */,
+				C02D8FD43FF3EFB454F259BB /* HexagonChartView.swift */,
+			);
+			path = Hexagon;
+			sourceTree = "<group>";
+		};
+		FF61D22A254B18F8877746BC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				154171B6022D3BD83CCCD6B7 /* Chart */,
+				880208C83A993CE1AFDD058C /* ContentView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,8 +262,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				BF5794C52EEAE84E004DB46A /* View */,
-				BF5794CC2EEAE855004DB46A /* Utils */,
+				BF164F5F2EEC02BC00A7108D /* Path */,
 			);
 			name = EDICC;
 			packageProductDependencies = (
@@ -297,6 +338,10 @@
 				791DE45860F7C3158F4AB39F /* TuistAssets+EDICC.swift in Sources */,
 				5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */,
 				2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */,
+				2904EABBE6860BDF3280F084 /* UIColor + extensions.swift in Sources */,
+				24D89CA0D280C726056614A6 /* HexagonBackgroundView.swift in Sources */,
+				3BEB56B1879C505F50AA774B /* HexagonChartView.swift in Sources */,
+				3BA88DE5FD8BAA66657566AB /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +363,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = MAU8HFALP8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/EDICC-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -345,6 +391,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = MAU8HFALP8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/EDICC-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;

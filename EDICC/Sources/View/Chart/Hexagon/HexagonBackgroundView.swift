@@ -26,7 +26,7 @@ class HexagonView: UIView {
     }
     
     // 육각형의 선 굵기를 설정
-    public var lineWidth: CGFloat = 2.0 {
+    public var lineWidth: CGFloat = 3.0 {
         didSet {
             shapeLayer.lineWidth = lineWidth
         }
@@ -65,35 +65,25 @@ class HexagonView: UIView {
         shapeLayer.path = createFlatTopHexagonPath().cgPath
     }
     
-    // MARK: - 사용자 요청: 12시 방향이 선분인 육각형 경로
     public func createFlatTopHexagonPath() -> UIBezierPath {
         let sideLength = min(bounds.width, bounds.height) / 2.0
-        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        let radius: CGFloat = sideLength / 10
+        let adjustedSideLenght = sideLength - radius
         
-        let path = UIBezierPath()
-        var points: [CGPoint] = []
+        let center = CGPoint(x: bounds.midX - (radius / 2), y: bounds.midY)
         
-        let startAngle: CGFloat = 0
-        let angleStep: CGFloat = .pi / 3.0 // 60도 간격
+        let turtle = TurtlePath(startPoint: center)
         
-        for i in 0..<6 {
-            let angle = startAngle + CGFloat(i) * angleStep
-            
-            let x = center.x + sideLength * cos(angle)
-            let y = center.y - sideLength * sin(angle)
-            
-            points.append(CGPoint(x: x, y: y))
+        turtle.turn(angle: .pi / 6)
+        turtle.move(sideLength)
+        turtle.turn(angle: .pi / 3)
+        
+        for _ in 0..<6 {
+            turtle.drawCircle(angle: .pi / 3, radius: radius)
+            turtle.drawLine(adjustedSideLenght)
         }
         
-        if let firstPoint = points.first {
-            path.move(to: firstPoint)
-            for i in 1..<points.count {
-                path.addLine(to: points[i])
-            }
-            path.close()
-        }
-        
-        return path
+        return turtle.path
     }
 }
 

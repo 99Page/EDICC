@@ -9,5 +9,21 @@ import Foundation
 import UIKit
 
 class HexagonChartView: UIView {
+    var hexagonViews = [HexagonView]()
     
+    init() {
+        super.init(frame: .zero)
+        makeConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func makeConstraints() {
+        for i in 0..<5 {
+            let hexagonView = HexagonView()
+            addSubview(hexagonView)
+        }
+    }
 }

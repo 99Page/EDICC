@@ -2,6 +2,12 @@ import ProjectDescription
 
 let project = Project(
     name: "EDICC",
+    packages: [
+        .remote(
+            url: "https://github.com/SnapKit/SnapKit.git",
+            requirement: .upToNextMajor(from: "5.7.1")
+        )
+        ],
     targets: [
         .target(
             name: "EDICC",
@@ -19,7 +25,14 @@ let project = Project(
             ),
             sources: ["EDICC/Sources/**"],
             resources: ["EDICC/Resources/**"],
-            dependencies: []
+            dependencies: [
+                .package(product: "SnapKit")
+            ],
+            settings: .settings(
+                base: [
+                    "DEVELOPMENT_TEAM": "MAU8HFALP8"
+                ]
+            )
         ),
         .target(
             name: "EDICCTests",

@@ -42,5 +42,7 @@ extension UIColor {
         // Blue (RRGGBB에서 끝 2자리)
         let blue = CGFloat(rgbValue & 0x0000FF) / 255.0
         
-        // 3. UIColor 초기화
-        self.init(red: red,
+        // 3. UIColor 초기화 (완성된 부분)
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
