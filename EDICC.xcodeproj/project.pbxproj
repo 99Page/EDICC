@@ -3,18 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		023753A10971410ACC3E19FD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B44FC3816527394D20EAD078 /* Preview Assets.xcassets */; };
-		24D89CA0D280C726056614A6 /* HexagonBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E8262289A37BAB88CF1951 /* HexagonBackgroundView.swift */; };
+		1184CF9083C078BC1A155029 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 016CFC1E4EBC4027AA45AB9B /* SnapKit */; };
+		24D89CA0D280C726056614A6 /* HexagonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3E8262289A37BAB88CF1951 /* HexagonView.swift */; };
 		2904EABBE6860BDF3280F084 /* UIColor + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */; };
 		2AD63DF265F349D74A0710A6 /* EDICCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */; };
 		2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */; };
 		3BA88DE5FD8BAA66657566AB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880208C83A993CE1AFDD058C /* ContentView.swift */; };
 		3BEB56B1879C505F50AA774B /* HexagonChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D8FD43FF3EFB454F259BB /* HexagonChartView.swift */; };
 		5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */; };
+		6E715F8A9CA2E7EF052221C9 /* TurtlePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32800FB22984FBE0CF90B10 /* TurtlePath.swift */; };
 		71952B550F2066EEE89F8D6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26360919DCFD0EDCB5C6D738 /* Assets.xcassets */; };
 		791DE45860F7C3158F4AB39F /* TuistAssets+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F2F36E66CBC4FD77832074 /* TuistAssets+EDICC.swift */; };
 /* End PBXBuildFile section */
@@ -62,22 +64,20 @@
 		880208C83A993CE1AFDD058C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extensions.swift"; sourceTree = "<group>"; };
 		A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCApp.swift; sourceTree = "<group>"; };
+		B32800FB22984FBE0CF90B10 /* TurtlePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurtlePath.swift; sourceTree = "<group>"; };
 		B44FC3816527394D20EAD078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C02D8FD43FF3EFB454F259BB /* HexagonChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonChartView.swift; sourceTree = "<group>"; };
 		D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+EDICC.swift"; sourceTree = "<group>"; };
 		E0AA67CA67B986598A751745 /* EDICC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDICC.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F3E8262289A37BAB88CF1951 /* HexagonBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonBackgroundView.swift; sourceTree = "<group>"; };
+		F3E8262289A37BAB88CF1951 /* HexagonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		BF164F5F2EEC02BC00A7108D /* Path */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Path; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3D5F7C1CEC3DB5CC40A891BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1184CF9083C078BC1A155029 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,10 +166,18 @@
 		A117B479EA268DD1F070FDA8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				BF164F5F2EEC02BC00A7108D /* Path */,
+				B325E4D4007DFB0F9A1A5C6B /* Path */,
 				8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		B325E4D4007DFB0F9A1A5C6B /* Path */ = {
+			isa = PBXGroup;
+			children = (
+				B32800FB22984FBE0CF90B10 /* TurtlePath.swift */,
+			);
+			path = Path;
 			sourceTree = "<group>";
 		};
 		B52176D11F7531728EF67B0E /* Preview Content */ = {
@@ -209,7 +217,7 @@
 		D82574B350E489D4F3209385 /* Hexagon */ = {
 			isa = PBXGroup;
 			children = (
-				F3E8262289A37BAB88CF1951 /* HexagonBackgroundView.swift */,
+				F3E8262289A37BAB88CF1951 /* HexagonView.swift */,
 				C02D8FD43FF3EFB454F259BB /* HexagonChartView.swift */,
 			);
 			path = Hexagon;
@@ -261,11 +269,9 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				BF164F5F2EEC02BC00A7108D /* Path */,
-			);
 			name = EDICC;
 			packageProductDependencies = (
+				016CFC1E4EBC4027AA45AB9B /* SnapKit */,
 			);
 			productName = EDICC;
 			productReference = E0AA67CA67B986598A751745 /* EDICC.app */;
@@ -293,6 +299,9 @@
 				en,
 			);
 			mainGroup = C0324E316A2FAB10EEB84A4C;
+			packageReferences = (
+				7D5408E48CC3E7C78BEF7E2E /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = C2BE472BDAC040E2E423ACD2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -338,8 +347,9 @@
 				791DE45860F7C3158F4AB39F /* TuistAssets+EDICC.swift in Sources */,
 				5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */,
 				2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */,
+				6E715F8A9CA2E7EF052221C9 /* TurtlePath.swift in Sources */,
 				2904EABBE6860BDF3280F084 /* UIColor + extensions.swift in Sources */,
-				24D89CA0D280C726056614A6 /* HexagonBackgroundView.swift in Sources */,
+				24D89CA0D280C726056614A6 /* HexagonView.swift in Sources */,
 				3BEB56B1879C505F50AA774B /* HexagonChartView.swift in Sources */,
 				3BA88DE5FD8BAA66657566AB /* ContentView.swift in Sources */,
 			);
@@ -610,6 +620,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D5408E48CC3E7C78BEF7E2E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		016CFC1E4EBC4027AA45AB9B /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7E011DC9F6A2FF6CC569F2F8 /* Project object */;
 }

@@ -19,14 +19,14 @@ class HexagonView: UIView {
     }
     
     // 육각형의 선 색상을 설정
-    public var strokeColor: UIColor = UIColor(hex: "3A336B") {
+    public var strokeColor: UIColor = UIColor(resource: .hexagonStroke) {
         didSet {
             shapeLayer.strokeColor = strokeColor.cgColor
         }
     }
     
     // 육각형의 선 굵기를 설정
-    public var lineWidth: CGFloat = 3.0 {
+    public var lineWidth: CGFloat = 4.0 {
         didSet {
             shapeLayer.lineWidth = lineWidth
         }
