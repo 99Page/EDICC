@@ -20,6 +20,14 @@
 public enum EDICCAsset: Sendable {
   public enum Assets {
   public static let accentColor = EDICCColors(name: "AccentColor")
+    public static let creamyOrange = EDICCColors(name: "CreamyOrange")
+    public static let hexagonBackground = EDICCColors(name: "HexagonBackground")
+    public static let hexagonStroke = EDICCColors(name: "HexagonStroke")
+    public static let iceBlue = EDICCColors(name: "IceBlue")
+    public static let lavendar = EDICCColors(name: "Lavendar")
+    public static let lemonYellow = EDICCColors(name: "LemonYellow")
+    public static let pastelPink = EDICCColors(name: "PastelPink")
+    public static let softMint = EDICCColors(name: "SoftMint")
   }
   public enum PreviewAssets {
   }
