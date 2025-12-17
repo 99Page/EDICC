@@ -14,13 +14,14 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "io.tuist.EDICC",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("18.5"),
             infoPlist: .extendingDefault(
                 with: [
                     "UILaunchScreen": [
                         "UIColorName": "",
                         "UIImageName": "",
                     ],
+                    "UIObservationTrackingEnabled" : "YES"
                 ]
             ),
             sources: ["EDICC/Sources/**"],
@@ -39,7 +40,7 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: "io.tuist.EDICCTests",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("18.5"),
             infoPlist: .default,
             sources: ["EDICC/Tests/**"],
             resources: [],

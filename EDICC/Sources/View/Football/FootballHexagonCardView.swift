@@ -1,0 +1,28 @@
+//
+//  FootballHexagonCardView.swift
+//  EDICC
+//
+//  Created by 노우영 on 12/18/25.
+//
+
+import SwiftUI
+
+@Observable
+class FootballHexagonCardModel {
+    var hexagonCard = HexagonCardModel()
+}
+
+struct FootballHexagonCardView: View {
+    
+    @State private var model = FootballHexagonCardModel()
+    
+    var body: some View {
+        HexagonCardView(model: model.hexagonCard) {
+            FootballTeamSelectView(vm: FootballTeamSelectViewModel(footballService: .preview))
+        }
+    }
+}
+
+#Preview {
+    FootballHexagonCardView()
+}

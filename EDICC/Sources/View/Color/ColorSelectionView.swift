@@ -25,12 +25,19 @@ struct ColorSelectionView: View {
     
     @Binding var selectedColor: Color
     
-    let theme: ColorTheme
+    let presets: [IdentifiableColor]
+    let bannedColor: Set<IdentifiableColor>
+    
+    init(selectedColor: Binding<Color>, theme: ColorTheme, bannedColor: Set<IdentifiableColor> = []) {
+        self._selectedColor = selectedColor
+        self.presets = theme.presets.filter { !bannedColor.contains($0) }
+        self.bannedColor = bannedColor
+    }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20) {
-                ForEach(theme.presets) { color in
+                ForEach(presets) { color in
                     Circle()
                         .fill(color.color)
                         .frame(width: 20, height: 20)
@@ -51,5 +58,9 @@ struct ColorSelectionView: View {
 #Preview {
     @Previewable @State var color: Color = .red
     
-    ColorSelectionView(selectedColor: $color, theme: .chart)
+    ColorSelectionView(
+        selectedColor: $color,
+        theme: .chart,
+        bannedColor: [] // Pass an empty set for preview
+    )
 }

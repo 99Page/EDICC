@@ -20,7 +20,7 @@ class HexagonView: UIView {
         didSet { shapeLayer.strokeColor = strokeColor.cgColor }
     }
     
-    public var lineWidth: CGFloat = 4 {
+    public var lineWidth: CGFloat = 2.5 {
         didSet {
             shapeLayer.lineWidth = lineWidth
             setNeedsLayout() // 선 두께가 바뀌면 레이아웃 다시 계산

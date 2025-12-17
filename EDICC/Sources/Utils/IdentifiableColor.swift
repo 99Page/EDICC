@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct IdentifiableColor: Identifiable {
-    let id = UUID()
+struct IdentifiableColor: Identifiable, Hashable {
+    var id: Int { color.hashValue }
     var color: Color
 }
 

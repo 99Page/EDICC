@@ -4,7 +4,7 @@ import SwiftUI
 struct EDICCApp: App {
     var body: some Scene {
         WindowGroup {
-            HexagonCardView()
+            FootballHexagonCardView()
         }
     }
 }
