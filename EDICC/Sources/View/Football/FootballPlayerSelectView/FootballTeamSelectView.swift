@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor
 class FootballTeamSelectViewModel {
     var model = FootballTeamSelectModel()
+    var squadVM: FootballSquadViewModel?
     
     private var footballService: FootballService
     
@@ -39,6 +40,25 @@ class FootballTeamSelectViewModel {
                 }
             }
         }
+    }
+    
+    func seasonTapped(_ season: Int) {
+        debugPrint("season")
+        guard let team = model.selectedTeam else { return }
+        debugPrint("tapped")
+        model.selectedSeason = season
+        
+        let model = FootballSquadModel(targetSeason: season, team: team)
+        squadVM = FootballSquadViewModel(
+            model: model,
+            footballService: footballService,
+            onPlayerSelected: { [weak self] player in
+                self?.handlePlayerSelected(player)
+            })
+    }
+    
+    private func handlePlayerSelected(_ player: FootballPlayer) {
+        
     }
 }
 
@@ -80,18 +100,23 @@ struct FootballTeamSelectView: View {
             }
             
             if let selectedTeam = vm.model.selectedTeam,
-               let selectedSeason = vm.model.selectedSeason {
-                HStack {
-                    FootballSelectionSummaryView(
-                        team: selectedTeam,
-                        season: selectedSeason
-                    ) {
-                        withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                            vm.downArrowTapped()
+               let selectedSeason = vm.model.selectedSeason,
+               let squadVM = vm.squadVM {
+                VStack {
+                    HStack {
+                        FootballSelectionSummaryView(
+                            team: selectedTeam,
+                            season: selectedSeason
+                        ) {
+                            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
+                                vm.downArrowTapped()
+                            }
                         }
+                        
+                        Spacer()
                     }
                     
-                    Spacer()
+                    FootballSquadView(vm: squadVM)
                 }
                 .matchedGeometryEffect(id: "morph", in: animation)
             }
@@ -112,11 +137,11 @@ struct FootballTeamSelectView: View {
                     } footer: {
                         if let selected = vm.model.selectedTeam, chunk.contains(selected) {
                             SeasonSelectView(
-                                selectedSeason: $vm.model.selectedSeason,
                                 selecedTeam: selected,
                                 seasons: vm.model.availableSeasons
-                            )
-                            .transition(.opacity.combined(with: .move(edge: .top)))
+                            ) { season in
+                                vm.seasonTapped(season)
+                            }
                         }
                     }
                 }

@@ -44,6 +44,6 @@ extension FootballService {
     static let preview = FootballService { _ in
         AvailableSeasonResponse(get: "", parameters: .init(team: "Liverpool"), errors: [], results: 0, paging: .init(current: 0, total: 0), response: [2020, 2021, 2022])
     } fetchSquad: { _, _ in
-        FootballSquadResponse()
+            .manchesterUnited()
     }
 }

@@ -9,38 +9,48 @@ import SwiftUI
 
 @MainActor
 class FootballSquadViewModel {
-    var model = FootballSquadModel()
+    var model: FootballSquadModel
     
     private let footballService: FootballService
     
-    var onPlayerSelected: (Player) -> Void
+    var onPlayerSelected: (FootballPlayer) -> Void
     
     init(
+        model: FootballSquadModel,
         footballService: FootballService = .live,
-        onPlayerSelected: @escaping (Player) -> Void
+        onPlayerSelected: @escaping (FootballPlayer) -> Void
     ) {
+        self.model = model
         self.footballService = footballService
         self.onPlayerSelected = onPlayerSelected
     }
     
     func onAppear() {
         guard model.players.isEmpty else { return }
+
         
         Task {
-            
+            let response = try await footballService.fetchSquad(model.targetSeason, model.team.id)
+            model.players = response.response.first?.players.map { FootballPlayer(dto: $0) } ?? []
         }
     }
     
-    func playerSelected(_ player: Player) {
+    func playerSelected(_ player: FootballPlayer) {
         onPlayerSelected(player)
     }
 }
 
 @Observable
 class FootballSquadModel {
-    var team: EPLTeam = .machesterUnited
-    var positionFilter: PlayerPosition = .all
-    var players: [Player] = Player.dummies
+    let targetSeason: Int
+    var team: EPLTeam
+    var positionFilter: FootballPosition = .all
+    var players: [FootballPlayer] = []
+    
+    init(targetSeason: Int, team: EPLTeam) {
+        self.targetSeason = targetSeason
+        self.team = team
+    }
 }
 
 
@@ -50,45 +60,57 @@ struct FootballSquadView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            HStack {
-                Text("Squad List")
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
-                        ForEach(PlayerPosition.allCases, id: \.self) { position in
-                            PositionFilterButton(
-                                position: position.rawValue,
-                                isSelected: vm.model.positionFilter == position,
-                                color: vm.model.team.color
-                            ) {
-                                withAnimation(.spring()) {
-                                    vm.model.positionFilter = position
-                                }
+            headerView
+                .padding(.top, 10)
+                .padding(.horizontal, 24)
+            
+            playerList
+        }
+        .background(Color(uiColor: .systemGroupedBackground))
+        .onAppear {
+            vm.onAppear()
+        }
+    }
+    
+    var playerList: some View {
+        ScrollView {
+            LazyVStack(spacing: 12) {
+                ForEach(vm.model.players) { player in
+                    Button {
+                        vm.playerSelected(player)
+                    } label: {
+                        PlayerRowCard(player: player)
+                            .transition(.opacity.combined(with: .move(edge: .bottom)))
+                    }
+                }
+            }
+            .padding(.horizontal, 24)
+            .padding(.bottom, 40) // 하단 여백
+        }
+    }
+    
+    var headerView: some View {
+        HStack {
+            Text("Squad List")
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .foregroundColor(.primary)
+                .layoutPriority(1)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(FootballPosition.allCases, id: \.self) { position in
+                        PositionFilterButton(
+                            position: position.rawValue,
+                            isSelected: vm.model.positionFilter == position,
+                            color: vm.model.team.color
+                        ) {
+                            withAnimation(.spring()) {
+                                vm.model.positionFilter = position
                             }
                         }
                     }
                 }
             }
-            
-            .padding(.top, 10)
-            .padding(.horizontal, 24)
-            
-            // 2. 선수 리스트
-            ScrollView {
-                LazyVStack(spacing: 12) {
-                    ForEach(vm.model.players) { player in
-                        PlayerRowCard(player: player)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                        
-                    }
-                }
-                .padding(.horizontal, 24)
-                .padding(.bottom, 40) // 하단 여백
-            }
-        }
-        .background(Color(uiColor: .systemGroupedBackground)) // 배경색 약간 회색
-        .onAppear {
-            
         }
     }
 }
@@ -118,7 +140,7 @@ struct PositionFilterButton: View {
 
 // MARK: - 하위 컴포넌트: 선수 카드 (Row)
 struct PlayerRowCard: View {
-    let player: Player
+    let player: FootballPlayer
     
     var body: some View {
         HStack(spacing: 16) {
@@ -132,75 +154,83 @@ struct PlayerRowCard: View {
                     .font(.system(size: 20))
                     .foregroundColor(.gray.opacity(0.5))
             }
-            .frame(width: 48, height: 48) // 터치하기 좋게 크기 약간 키움 (44 -> 48)
-            // ⭐️ 1. 배경색: 연한 회색 (시스템 컬러 사용 추천)
+            .frame(width: 48, height: 48)
             .background(Color(uiColor: .systemGray6))
-            // ⭐️ 2. 모양: 원(Circle) 대신 둥근 사각형(RoundedRectangle) 적용
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             
-            // 3. 이름 및 포지션
-            VStack(alignment: .leading, spacing: 2) {
-                Text("\(player.formattedNumber) \(player.name)")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(.primary)
-                Text(player.position.rawValue)
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Color.gray.opacity(0.1))
-                    .cornerRadius(4)
-            }
+            Text("\(player.formattedNumber) \(player.name)")
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundColor(.primary)
             
             Spacer()
             
-            // 4. 국적 또는 상세 화살표
-            Text(player.nationality) // 국적 이모지
-                .font(.title3)
+            Text(player.position.rawValue)
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(.secondary)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Color.gray.opacity(0.1))
+                .cornerRadius(4)
         }
         .padding(16)
         .background(Color.white)
         .cornerRadius(16)
-        // 카드 그림자
         .shadow(color: .black.opacity(0.03), radius: 5, x: 0, y: 2)
     }
 }
 
 
-enum PlayerPosition: String, CaseIterable {
+enum FootballPosition: String, CaseIterable {
     case all = "ALL"
     case fw = "FW"
     case mf = "MF"
     case df = "DF"
     case gk = "GK"
+    
+    init(from dto: PositionDTO) {
+        switch dto {
+        case .attacker:
+            self = .fw
+        case .midfielder:
+            self = .mf
+        case .defender:
+            self = .df
+        case .goalkeeper:
+            self = .gk
+        }
+    }
 }
 
-struct Player: Identifiable {
+struct FootballPlayer: Identifiable {
     let id = UUID()
     let name: String
     let number: Int
-    let position: PlayerPosition
-    let nationality: String // 국적 (이모지 or 이미지 URL)
+    let position: FootballPosition
     let imageURL: String?
     
     var formattedNumber: String {
         return String(format: "%02d", number)
     }
-}
-
-extension Player {
-    static let dummies = [
-        Player(name: "Bruno Fernandes", number: 8, position: .mf, nationality: "🇵🇹", imageURL: "https://resources.premierleague.com/premierleague/photos/players/250x250/p141746.png"),
-        Player(name: "Marcus Rashford", number: 10, position: .fw, nationality: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", imageURL: "https://resources.premierleague.com/premierleague/photos/players/250x250/p176297.png"),
-        Player(name: "Harry Maguire", number: 5, position: .df, nationality: "🏴󠁧󠁢󠁥󠁮󠁧󠁿", imageURL: "https://resources.premierleague.com/premierleague/photos/players/250x250/p95658.png"),
-        Player(name: "André Onana", number: 24, position: .gk, nationality: "🇨🇲", imageURL: "https://resources.premierleague.com/premierleague/photos/players/250x250/p202641.png"),
-        Player(name: "Casemiro", number: 18, position: .mf, nationality: "🇧🇷", imageURL: "https://resources.premierleague.com/premierleague/photos/players/250x250/p61366.png")
-    ]
+    
+    init(name: String, number: Int, position: FootballPosition, imageURL: String?) {
+        self.name = name
+        self.number = number
+        self.position = position
+        self.imageURL = imageURL
+    }
+    
+    init(dto: FootballPlayerDTO) {
+        self.name = dto.name
+        self.number = dto.number
+        self.position = .init(from: dto.position)
+        self.imageURL = dto.photo
+    }
 }
 
 #Preview {
-    FootballSquadView(vm: FootballSquadViewModel(footballService: .preview, onPlayerSelected: { _ in
-        
-    }))
+    var model = FootballSquadModel(targetSeason: 2021, team: .liverpool)
+    let viewModel = FootballSquadViewModel(model: model, footballService: .preview) { _ in }
+    
+    FootballSquadView(vm: viewModel)
 }
