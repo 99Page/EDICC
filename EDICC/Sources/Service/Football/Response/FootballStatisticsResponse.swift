@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct FootballSquadResponse: Decodable {
+struct FootballStatisticsResponse: Decodable {
     let get: String
     let errors: [[String: String]]?
     let results: Int
     let paging: RapidPagingDTO
     let response: [Response]
     
-    static func manchesterUnited() -> FootballSquadResponse {
-        FootballSquadResponse(
+    static func manchesterUnited() -> FootballStatisticsResponse {
+        FootballStatisticsResponse(
             get: "players/squads",
             errors: [[:]],
             results: 1,
@@ -27,10 +27,6 @@ struct FootballSquadResponse: Decodable {
     struct Response: Decodable {
         let player: FootballPlayerDTO
         let statistics: [Statistic]
-        
-        var eplStatistic: Statistic? {
-            statistics.first { $0.league.id == FootballLeague.epl.id }
-        }
         
         static func jaidonSancho() -> Response {
             Response(player: FootballPlayerDTO.jaidonSancho(), statistics: [.manchesterUnited()])
@@ -183,16 +179,9 @@ struct FootballSquadResponse: Decodable {
         let logo: String
         
         static func manchesterUnited() -> Team {
-            Team(id: 33, name: "Mancherster United", logo: "https://media.api-sports.io/football/teams/33.png")
+            Team(id: 33, name: "Manchester United", logo: "https://media.api-sports.io/football/teams/33.png")
         }
     }
-}
-
-enum PositionDTO: String, Codable {
-    case attacker = "Attacker"
-    case defender = "Defender"
-    case goalkeeper = "Goalkeeper"
-    case midfielder = "Midfielder"
 }
 
 struct FootballPlayerDTO: Decodable {

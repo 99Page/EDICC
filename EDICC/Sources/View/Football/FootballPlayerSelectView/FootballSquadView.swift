@@ -28,7 +28,6 @@ class FootballSquadViewModel {
     func onAppear() {
         guard model.players.isEmpty else { return }
 
-        
         Task {
             do {
                 let response = try await footballService.fetchStatistics(model.targetSeason, model.team.id)
@@ -180,30 +179,6 @@ struct PlayerRowCard: View {
     }
 }
 
-
-enum FootballPosition: String, CaseIterable {
-    case all = "ALL"
-    case fw = "FW"
-    case mf = "MF"
-    case df = "DF"
-    case gk = "GK"
-    
-    init?(from games: FootballSquadResponse.Games) {
-        switch games.position.lowercased() {
-        case "defender":
-            self = .df
-        case "midfielder":
-            self = .mf
-        case "attacker":
-            self = .fw
-        case "goalkeeper":
-            self = .gk
-        default:
-            return nil
-        }
-    }
-}
-
 struct FootballPlayer: Identifiable {
     let id = UUID()
     let name: String
@@ -218,11 +193,14 @@ struct FootballPlayer: Identifiable {
         self.imageURL = imageURL
     }
     
-    init(dto: FootballSquadResponse.Response) {
+    init(dto: FootballStatisticsResponse.Response) {
         self.name = dto.player.name
         self.country = .init(from: dto.player.nationality)
         
-        if let eplGames = dto.eplStatistic?.games {
+        let eplID = FootballLeague.epl.id
+        let eplStats = dto.statistics.first { $0.league.id == eplID }
+        
+        if let eplGames = eplStats?.games {
             self.position = .init(from: eplGames)
         } else {
             self.position = nil

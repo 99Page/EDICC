@@ -91,54 +91,53 @@ final class GPDRequest {
     }
     
     func debug() -> Self {
-            var log = "\n🚀 [GPDRequest Debugging] --------------------\n"
-            
-            // 1. URL 정보
-            if let finalURL = makeURL() {
-                log += "🌐 URL: \(finalURL.absoluteString)\n"
-            } else {
-                log += "🌐 URL: ❌ Invalid URL (생성 실패)\n"
-            }
-            
-            // 2. Method 정보
-            log += "💼 Method: \(httpMethod.rawValue)\n"
-            
-            // 3. Header 정보
-            if let headers = headerFields, !headers.isEmpty {
-                log += "🧢 Headers:\n"
-                headers.forEach { key, value in
-                    log += "   - \(key): \(value)\n"
-                }
-            } else {
-                log += "🧢 Headers: None\n"
-            }
-            
-            // 4. Body / Parameters 정보
-            if let params = params, !params.isEmpty {
-                log += "📦 Body / Parameters:\n"
-                
-                if httpMethod != .get {
-                    // JSON Pretty Print 시도
-                    if let jsonData = try? JSONSerialization.data(withJSONObject: params, options: [.prettyPrinted, .sortedKeys]),
-                       let jsonString = String(data: jsonData, encoding: .utf8) {
-                        log += jsonString + "\n"
-                    } else {
-                        log += "   \(params)\n"
-                    }
-                } else {
-                    log += "   (Query Params): \(params)\n"
-                }
-            } else {
-                log += "📦 Body: None\n"
-            }
-            
-            log += "--------------------------------------------\n"
-            
-            // ⭐️ 요청하신 대로 딱 한 번만 출력합니다.
-            print(log)
-            
-            return self
+        var log = "\n🚀 [GPDRequest Debugging] --------------------\n"
+        
+        // 1. URL 정보
+        if let finalURL = makeURL() {
+            log += "🌐 URL: \(finalURL.absoluteString)\n"
+        } else {
+            log += "🌐 URL: ❌ Invalid URL (생성 실패)\n"
         }
+        
+        // 2. Method 정보
+        log += "💼 Method: \(httpMethod.rawValue)\n"
+        
+        // 3. Header 정보
+        if let headers = headerFields, !headers.isEmpty {
+            log += "🧢 Headers:\n"
+            headers.forEach { key, value in
+                log += "   - \(key): \(value)\n"
+            }
+        } else {
+            log += "🧢 Headers: None\n"
+        }
+        
+        // 4. Body / Parameters 정보
+        if let params = params, !params.isEmpty {
+            log += "📦 Body / Parameters:\n"
+            
+            if httpMethod != .get {
+                // JSON Pretty Print 시도
+                if let jsonData = try? JSONSerialization.data(withJSONObject: params, options: [.prettyPrinted, .sortedKeys]),
+                   let jsonString = String(data: jsonData, encoding: .utf8) {
+                    log += jsonString + "\n"
+                } else {
+                    log += "   \(params)\n"
+                }
+            } else {
+                log += "   (Query Params): \(params)\n"
+            }
+        } else {
+            log += "📦 Body: None\n"
+        }
+        
+        log += "--------------------------------------------\n"
+        
+        print(log)
+        
+        return self
+    }
     
     fileprivate func performRequest() async throws -> Data {
         guard let url = makeURL() else { throw GPDError.invalidURL }
