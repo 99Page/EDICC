@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,10 +18,10 @@
 		1896BC794C9836136A052988 /* GPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF876F67D904E4F45AB2FF1 /* GPD.swift */; };
 		1A990B35234C7B9D2E17F140 /* TurtlePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905FC9631262A11C190FFAA /* TurtlePath.swift */; };
 		26394FA1B8A5EDF580EAB8A1 /* LegendSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D375BB82495ACFFC455838B /* LegendSelectionView.swift */; };
-		2904EABBE6860BDF3280F084 /* UIColor + extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */; };
 		2AD63DF265F349D74A0710A6 /* EDICCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EC1BE7BD18F3B8FF68573C /* EDICCTests.swift */; };
 		2D1E4722892C29BAA432AB02 /* EDICCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */; };
 		2ECE4138F11C1B84B696A44C /* RadarPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6AF3D252B29F3F02D0D09F0 /* RadarPolygon.swift */; };
+		342F5AFB3014A968B4335B06 /* RapidPagingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2793FE24B5B73BEACD574F45 /* RapidPagingDTO.swift */; };
 		366AC68B4FE541FA4C67E4FF /* HexagonChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B72F4D9C22419CE14A53C9 /* HexagonChartView.swift */; };
 		36B4238E3D661A3996BD1709 /* IdentifiableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D885072983AF68A08124CBC /* IdentifiableColor.swift */; };
 		39D61D083058F141AB0A4B74 /* FootballHexagonCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8765432282FCFB311289DBD6 /* FootballHexagonCardView.swift */; };
@@ -39,7 +39,8 @@
 		9A926A408C9614DAFE79D7AB /* FootballService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063D87B38D7A6E9D2D186C /* FootballService.swift */; };
 		9E3D03CE65D8B23E30A0CD72 /* Array +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CDC8E68C125019ECB3AE1 /* Array +.swift */; };
 		AA17DDFFA3CE165FEC28380E /* ColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92B35C1A627B4E22770CAD /* ColorSelectionView.swift */; };
-		BF54ED272EFC07940078F043 /* RapidPagingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54ED262EFC07940078F043 /* RapidPagingDTO.swift */; };
+		BF3033E42EFE65C2003F3E5B /* FootballLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3033E32EFE65C2003F3E5B /* FootballLeague.swift */; };
+		BF3033E62EFE6DEA003F3E5B /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3033E52EFE6DEA003F3E5B /* Country.swift */; };
 		CBDFE6221B8BA96E5F87FCE2 /* EPLTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */; };
 		FF45034813745E0CF960A25A /* HexagonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EFDE8AEB4CD631FC164F95 /* HexagonView.swift */; };
 /* End PBXBuildFile section */
@@ -86,6 +87,7 @@
 		19EFDE8AEB4CD631FC164F95 /* HexagonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonView.swift; sourceTree = "<group>"; };
 		1D375BB82495ACFFC455838B /* LegendSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendSelectionView.swift; sourceTree = "<group>"; };
 		26360919DCFD0EDCB5C6D738 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2793FE24B5B73BEACD574F45 /* RapidPagingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidPagingDTO.swift; sourceTree = "<group>"; };
 		37AE9F649F122894F6C3CC53 /* FootballSquadResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSquadResponse.swift; sourceTree = "<group>"; };
 		3905FC9631262A11C190FFAA /* TurtlePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurtlePath.swift; sourceTree = "<group>"; };
 		47E30685F5FC337ED33D9687 /* FootballSelectionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSelectionSummaryView.swift; sourceTree = "<group>"; };
@@ -102,12 +104,12 @@
 		84696FE3A124C79D72945A13 /* EDICCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EDICCTests-Info.plist"; sourceTree = "<group>"; };
 		8765432282FCFB311289DBD6 /* FootballHexagonCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballHexagonCardView.swift; sourceTree = "<group>"; };
 		8C1FCD42F7C9A5E25EDA9B7F /* UIHexagonChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHexagonChartView.swift; sourceTree = "<group>"; };
-		8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + extensions.swift"; sourceTree = "<group>"; };
 		9E23FD5327B2407B80EDE02D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCApp.swift; sourceTree = "<group>"; };
 		B0063D87B38D7A6E9D2D186C /* FootballService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballService.swift; sourceTree = "<group>"; };
 		B44FC3816527394D20EAD078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		BF54ED262EFC07940078F043 /* RapidPagingDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidPagingDTO.swift; sourceTree = "<group>"; };
+		BF3033E32EFE65C2003F3E5B /* FootballLeague.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballLeague.swift; sourceTree = "<group>"; };
+		BF3033E52EFE6DEA003F3E5B /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		C6AF3D252B29F3F02D0D09F0 /* RadarPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarPolygon.swift; sourceTree = "<group>"; };
 		CAF876F67D904E4F45AB2FF1 /* GPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPD.swift; sourceTree = "<group>"; };
 		D27A2C41F79D8BBB3A724A78 /* HexagonStatsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonStatsTableView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,10 @@
 		E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLTeam.swift; sourceTree = "<group>"; };
 		FB5AFC96BE13E9673D260AF4 /* FootballPlayerSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPlayerSelectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BF3033E72EFE7107003F3E5B /* UI + */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "UI +"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3D5F7C1CEC3DB5CC40A891BC /* Frameworks */ = {
@@ -159,7 +165,8 @@
 				81B6C32F5101A955F19FC27C /* AvailableSeasonResponse.swift */,
 				B0063D87B38D7A6E9D2D186C /* FootballService.swift */,
 				37AE9F649F122894F6C3CC53 /* FootballSquadResponse.swift */,
-				BF54ED262EFC07940078F043 /* RapidPagingDTO.swift */,
+				2793FE24B5B73BEACD574F45 /* RapidPagingDTO.swift */,
+				BF3033E32EFE65C2003F3E5B /* FootballLeague.swift */,
 			);
 			path = Football;
 			sourceTree = "<group>";
@@ -300,10 +307,11 @@
 		A117B479EA268DD1F070FDA8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BF3033E72EFE7107003F3E5B /* UI + */,
 				B2F080672589EEB75C821E33 /* BezierPath */,
 				C7233E4C7E50F140792AE5F7 /* Swift + */,
 				6D885072983AF68A08124CBC /* IdentifiableColor.swift */,
-				8F6FBEE90C5AD51AC1074177 /* UIColor + extensions.swift */,
+				BF3033E52EFE6DEA003F3E5B /* Country.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -418,6 +426,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				BF3033E72EFE7107003F3E5B /* UI + */,
+			);
 			name = EDICC;
 			packageProductDependencies = (
 				016CFC1E4EBC4027AA45AB9B /* SnapKit */,
@@ -500,12 +511,14 @@
 				8581D40D00F9D86F259B57D4 /* AvailableSeasonResponse.swift in Sources */,
 				9A926A408C9614DAFE79D7AB /* FootballService.swift in Sources */,
 				62280039F5FE8511A50FD593 /* FootballSquadResponse.swift in Sources */,
+				BF3033E62EFE6DEA003F3E5B /* Country.swift in Sources */,
+				342F5AFB3014A968B4335B06 /* RapidPagingDTO.swift in Sources */,
 				1896BC794C9836136A052988 /* GPD.swift in Sources */,
+				BF3033E42EFE65C2003F3E5B /* FootballLeague.swift in Sources */,
 				2ECE4138F11C1B84B696A44C /* RadarPolygon.swift in Sources */,
 				1A990B35234C7B9D2E17F140 /* TurtlePath.swift in Sources */,
 				36B4238E3D661A3996BD1709 /* IdentifiableColor.swift in Sources */,
 				9E3D03CE65D8B23E30A0CD72 /* Array +.swift in Sources */,
-				2904EABBE6860BDF3280F084 /* UIColor + extensions.swift in Sources */,
 				AA17DDFFA3CE165FEC28380E /* ColorSelectionView.swift in Sources */,
 				CBDFE6221B8BA96E5F87FCE2 /* EPLTeam.swift in Sources */,
 				39D61D083058F141AB0A4B74 /* FootballHexagonCardView.swift in Sources */,
@@ -522,7 +535,6 @@
 				62D24DA8A7E5AC7FB827ABB2 /* UIHexagonChartView.swift in Sources */,
 				000233B210711F8D0573A1EA /* LegendBadgeView.swift in Sources */,
 				26394FA1B8A5EDF580EAB8A1 /* LegendSelectionView.swift in Sources */,
-				BF54ED272EFC07940078F043 /* RapidPagingDTO.swift in Sources */,
 				FF45034813745E0CF960A25A /* HexagonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

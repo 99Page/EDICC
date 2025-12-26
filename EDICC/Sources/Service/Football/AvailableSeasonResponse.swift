@@ -13,7 +13,7 @@ struct AvailableSeasonResponse: Decodable {
     let errors: [String]
     let results: Int
     let paging: Paging
-    var response: [Int]
+    var response: [Int] // 무료 버전에는 접근 제한이 있습니다. 
     
     struct Paging: Decodable {
         let current, total: Int

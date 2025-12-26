@@ -43,12 +43,11 @@ class FootballTeamSelectViewModel {
     }
     
     func seasonTapped(_ season: Int) {
-        debugPrint("season")
         guard let team = model.selectedTeam else { return }
-        debugPrint("tapped")
         model.selectedSeason = season
         
         let model = FootballSquadModel(targetSeason: season, team: team)
+        
         squadVM = FootballSquadViewModel(
             model: model,
             footballService: footballService,

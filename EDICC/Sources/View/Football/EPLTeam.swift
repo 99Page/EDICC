@@ -11,6 +11,7 @@ enum EPLTeam: CaseIterable, Identifiable {
     case machesterUnited
     case tottenhamHotspur
     case liverpool
+    case manchersterCity
     
     
     // https://dashboard.api-football.com/soccer/ids/teams
@@ -19,6 +20,7 @@ enum EPLTeam: CaseIterable, Identifiable {
         case .machesterUnited: 33
         case .tottenhamHotspur: 47
         case .liverpool: 40
+        case .manchersterCity: 50
         }
     }
     
@@ -27,6 +29,7 @@ enum EPLTeam: CaseIterable, Identifiable {
         case .machesterUnited: "맨체스터 유나이티드"
         case .tottenhamHotspur: "토트넘"
         case .liverpool: "리버풀"
+        case .manchersterCity: "맨시티"
         }
     }
     
@@ -35,6 +38,7 @@ enum EPLTeam: CaseIterable, Identifiable {
         case .machesterUnited: Color(.footballRed)
         case .tottenhamHotspur: Color(.footballBlue)
         case .liverpool: Color(.footballRed)
+        case .manchersterCity: Color(.footballBlue)
         }
     }
 }

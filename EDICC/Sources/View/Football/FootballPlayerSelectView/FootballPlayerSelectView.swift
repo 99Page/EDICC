@@ -30,8 +30,12 @@ class FootballSquadViewModel {
 
         
         Task {
-            let response = try await footballService.fetchSquad(model.targetSeason, model.team.id)
-            model.players = response.response.first?.players.map { FootballPlayer(dto: $0) } ?? []
+            do {
+                let response = try await footballService.fetchStatistics(model.targetSeason, model.team.id)
+                model.players = response.response.map { FootballPlayer(dto: $0) }
+            } catch {
+                debugPrint("error: \(error)")
+            }
         }
     }
     
@@ -62,30 +66,24 @@ struct FootballSquadView: View {
         VStack(spacing: 20) {
             headerView
                 .padding(.top, 10)
-                .padding(.horizontal, 24)
             
             playerList
         }
-        .background(Color(uiColor: .systemGroupedBackground))
         .onAppear {
             vm.onAppear()
         }
     }
     
     var playerList: some View {
-        ScrollView {
-            LazyVStack(spacing: 12) {
-                ForEach(vm.model.players) { player in
-                    Button {
-                        vm.playerSelected(player)
-                    } label: {
-                        PlayerRowCard(player: player)
-                            .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
+        LazyVStack(spacing: 12) {
+            ForEach(vm.model.players) { player in
+                Button {
+                    vm.playerSelected(player)
+                } label: {
+                    PlayerRowCard(player: player)
+                        .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }
             }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 40) // 하단 여백
         }
     }
     
@@ -158,20 +156,22 @@ struct PlayerRowCard: View {
             .background(Color(uiColor: .systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             
-            Text("\(player.formattedNumber) \(player.name)")
+            Text("\(player.country.flag) \(player.name)")
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundColor(.primary)
             
             Spacer()
             
-            Text(player.position.rawValue)
-                .font(.caption)
-                .fontWeight(.bold)
-                .foregroundColor(.secondary)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 2)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(4)
+            if let position = player.position {
+                Text(position.rawValue)
+                    .font(.caption)
+                    .fontWeight(.bold)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(4)
+            }
         }
         .padding(16)
         .background(Color.white)
@@ -188,16 +188,18 @@ enum FootballPosition: String, CaseIterable {
     case df = "DF"
     case gk = "GK"
     
-    init(from dto: PositionDTO) {
-        switch dto {
-        case .attacker:
-            self = .fw
-        case .midfielder:
-            self = .mf
-        case .defender:
+    init?(from games: FootballSquadResponse.Games) {
+        switch games.position.lowercased() {
+        case "defender":
             self = .df
-        case .goalkeeper:
+        case "midfielder":
+            self = .mf
+        case "attacker":
+            self = .fw
+        case "goalkeeper":
             self = .gk
+        default:
+            return nil
         }
     }
 }
@@ -205,26 +207,28 @@ enum FootballPosition: String, CaseIterable {
 struct FootballPlayer: Identifiable {
     let id = UUID()
     let name: String
-    let number: Int
-    let position: FootballPosition
+    let country: Country
+    let position: FootballPosition?
     let imageURL: String?
     
-    var formattedNumber: String {
-        return String(format: "%02d", number)
-    }
-    
-    init(name: String, number: Int, position: FootballPosition, imageURL: String?) {
+    init(name: String, country: Country, position: FootballPosition, imageURL: String?) {
         self.name = name
-        self.number = number
+        self.country = country
         self.position = position
         self.imageURL = imageURL
     }
     
-    init(dto: FootballPlayerDTO) {
-        self.name = dto.name
-        self.number = dto.number
-        self.position = .init(from: dto.position)
-        self.imageURL = dto.photo
+    init(dto: FootballSquadResponse.Response) {
+        self.name = dto.player.name
+        self.country = .init(from: dto.player.nationality)
+        
+        if let eplGames = dto.eplStatistic?.games {
+            self.position = .init(from: eplGames)
+        } else {
+            self.position = nil
+        }
+        
+        self.imageURL = dto.player.photo
     }
 }
 

@@ -18,7 +18,7 @@ struct FootballHexagonCardView: View {
     
     var body: some View {
         HexagonCardView(model: model.hexagonCard) {
-            FootballTeamSelectView(vm: FootballTeamSelectViewModel(footballService: .preview))
+            FootballTeamSelectView(vm: FootballTeamSelectViewModel(footballService: .live))
         }
     }
 }

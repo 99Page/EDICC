@@ -9,7 +9,7 @@ import Foundation
 
 struct FootballService {
     var fetchAvailableSeason: (_ teamID: Int) async throws -> AvailableSeasonResponse
-    var fetchSquad: (_ season: Int, _ teamID: Int) async throws -> FootballSquadResponse
+    var fetchStatistics: (_ season: Int, _ teamID: Int) async throws -> FootballSquadResponse
 }
 
 extension FootballService {
@@ -28,7 +28,7 @@ extension FootballService {
             result.response = result.response.filter { $0 == 2021 || $0 == 2022 || $0 == 2023 }
             
             return result
-        }, fetchSquad: { season, teamID in
+        }, fetchStatistics: { season, teamID in
             let url = "https://v3.football.api-sports.io/players?team=\(teamID)&season=\(season)"
             
             let response = try await GPD.build(url)
@@ -43,7 +43,7 @@ extension FootballService {
     
     static let preview = FootballService { _ in
         AvailableSeasonResponse(get: "", parameters: .init(team: "Liverpool"), errors: [], results: 0, paging: .init(current: 0, total: 0), response: [2020, 2021, 2022])
-    } fetchSquad: { _, _ in
+    } fetchStatistics: { _, _ in
             .manchesterUnited()
     }
 }
