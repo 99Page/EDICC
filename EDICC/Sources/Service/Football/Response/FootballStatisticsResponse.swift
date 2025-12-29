@@ -48,6 +48,7 @@ struct FootballStatisticsResponse: Decodable {
         let dribbles: Dribbles
         let fouls: Fouls
         let cards: Cards
+        let tackles: Tackles
         
         static func manchesterUnited() -> Statistic {
             Statistic(
@@ -60,10 +61,21 @@ struct FootballStatisticsResponse: Decodable {
                 duels: .stub(),
                 dribbles: .stub(),
                 fouls: .stub(),
-                cards: .stub()
+                cards: .stub(),
+                tackles: .stub()
             )
         }
     }
+    
+    // MARK: - Tackles
+    struct Tackles: Decodable {
+        let total, blocks, interceptions: Int?
+        
+        static func stub() -> Tackles {
+            Tackles(total: 26, blocks: 4, interceptions: 10)
+        }
+    }
+
 
     // MARK: - Cards
     struct Cards: Codable {

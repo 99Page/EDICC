@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+@MainActor
+class FootballHexagonCardViewModel {
+    var model = HexagonCardModel()
+    var teamSelectVM = FootballTeamSelectViewModel()
+    
+    func handle() {
+        
+    }
+}
+
 @Observable
 class FootballHexagonCardModel {
     var hexagonCard = HexagonCardModel()
