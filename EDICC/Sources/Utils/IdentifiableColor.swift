@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct IdentifiableColor: Identifiable, Hashable {
-    var id: Int { color.hashValue }
-    var color: Color
+    var id: Int { value.hashValue }
+    var value: Color
 }
 
 extension IdentifiableColor {
     init(_ resource: ColorResource) {
-        self.color = Color(resource)
+        self.value = Color(resource)
     }
 }

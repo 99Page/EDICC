@@ -7,46 +7,46 @@
 
 import SwiftUI
 
-struct ChartLegendView<LegendView: View>: View {
-    @Binding var primaryColor: IdentifiableColor
-    let primaryTitle: String
+struct ChartLegendView<VM: Identifiable, LegendView: View>: View {
+    @Binding var legendVM: VM?
     
-    @Binding var secondaryColor: IdentifiableColor
-    let secondaryTitle: String
+    @Binding var primary: HexagonDataSet
+    @Binding var secondary: HexagonDataSet
     
-    @State private var isLegendSelectionViewPresented = false
     @State private var isPrimaryColorSelected: Bool = true
     
-    let legendView: () -> LegendView
+    let legendView: (VM) -> LegendView
+    
+    var legendSelected: (HexagonDataSet) -> Void
     
     
     var body: some View {
         HStack(spacing: 20) {
-            LegendBadgeView(color: $primaryColor.color, title: primaryTitle)
+            LegendBadgeView(color: $primary.color.value, title: primary.label)
                 .onTapGesture {
                     isPrimaryColorSelected = true
-                    isLegendSelectionViewPresented = true
+                    legendSelected(primary)
                 }
             
             Rectangle()
                 .fill(Color.gray.opacity(0.3))
                 .frame(width: 1, height: 12)
             
-            LegendBadgeView(color: $secondaryColor.color, title: secondaryTitle)
+            LegendBadgeView(color: $secondary.color.value, title: secondary.label)
                 .onTapGesture {
                     isPrimaryColorSelected = false
-                    isLegendSelectionViewPresented = true
+                    legendSelected(secondary)
                 }
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
         .background(Color.black.opacity(0.05))
         .cornerRadius(12)
-        .sheet(isPresented: $isLegendSelectionViewPresented) {
+        .sheet(item: $legendVM) { vm in
             LegendSelectionView(
-                color: isPrimaryColorSelected ? $primaryColor.color : $secondaryColor.color,
-                bannedColor: isPrimaryColorSelected ? [secondaryColor] : [primaryColor]
-            ) { legendView() }
+                color: isPrimaryColorSelected ? $primary.color.value : $secondary.color.value,
+                bannedColor: isPrimaryColorSelected ? [secondary.color] : [primary.color]
+            ) { legendView(vm) }
         }
     }
 }
@@ -68,22 +68,4 @@ struct LegendBadgeView: View {
                 .lineLimit(1)
         }
     }
-}
-
-#Preview {
-    
-    @Previewable @State var c1 = IdentifiableColor(.creamyOrange)
-    @Previewable @State var c2 = IdentifiableColor(.lavendar)
-    
-    ChartLegendView(
-        primaryColor: $c1,
-        primaryTitle: "c1",
-        secondaryColor: $c2,
-        secondaryTitle: "c2"
-    ) {
-        EmptyView()
-    }
-    .background(
-        Color.black
-    )
 }

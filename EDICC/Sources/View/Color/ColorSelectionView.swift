@@ -39,14 +39,14 @@ struct ColorSelectionView: View {
             HStack(spacing: 20) {
                 ForEach(presets) { color in
                     Circle()
-                        .fill(color.color)
+                        .fill(color.value)
                         .frame(width: 20, height: 20)
                         .overlay(
                             Circle()
-                                .stroke(Color.white, lineWidth: selectedColor == color.color ? 3 : 0)
+                                .stroke(Color.white, lineWidth: selectedColor == color.value ? 3 : 0)
                         )
                         .onTapGesture {
-                            selectedColor = color.color
+                            selectedColor = color.value
                         }
                 }
             }

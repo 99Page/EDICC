@@ -1,11 +1,27 @@
 import SwiftUI
 
-struct HexagonCardView<LegendView: View>: View {
+@Observable
+class HexagonCardViewModel {
+    var model: HexagonCardModel
+    
+    var legendSelected: ((HexagonDataSet) -> Void)?
+    
+    init(model: HexagonCardModel) {
+        self.model = model
+    }
+    
+    func selectLegend(_ hexagon: HexagonDataSet) {
+        legendSelected?(hexagon)
+    }
+}
+
+struct HexagonCardView<VM: Identifiable, LegendView: View>: View {
     
     
-    @Bindable var model: HexagonCardModel
+    @Binding var legendVM: VM?
+    @Bindable var vm: HexagonCardViewModel
     
-    let legendView: () -> LegendView
+    let legendView: (VM) -> LegendView
     
     var body: some View {
         GeometryReader { proxy in
@@ -13,19 +29,20 @@ struct HexagonCardView<LegendView: View>: View {
             let chartWidth = proxy.size.width
             ScrollView {
                 VStack(spacing: 0) {
-                    HexagonChartView(data: model.chart)
+                    HexagonChartView(data: vm.model.chart)
                         .frame(width: chartWidth, height: chartHeight, alignment: .top)
                     
                     ChartLegendView(
-                        primaryColor: $model.chart.dataSets[0].color,
-                        primaryTitle: model.chart.dataSets[0].label,
-                        secondaryColor: $model.chart.dataSets[1].color,
-                        secondaryTitle: model.chart.dataSets[1].label
-                    ) {
-                        legendView()
+                        legendVM: $legendVM,
+                        primary: $vm.model.chart.dataSets[0],
+                        secondary: $vm.model.chart.dataSets[1]
+                    ) { vm in
+                        legendView(vm)
+                    } legendSelected: { legend in
+                        vm.selectLegend(legend)
                     }
                     
-                    HexagonStatsTableView(model: model)
+                    HexagonStatsTableView(model: vm.model)
                         .padding(.top, 16)
                         .padding(.horizontal, 16)
                 }
@@ -36,7 +53,5 @@ struct HexagonCardView<LegendView: View>: View {
 
 
 #Preview {
-    let model = FootballHexagonCardModel()
-    
-    HexagonCardView(model: model.hexagonCard) { EmptyView() }
+    FootballHexagonCardView()
 }

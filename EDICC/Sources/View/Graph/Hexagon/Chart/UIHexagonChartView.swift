@@ -104,7 +104,7 @@ class UIHexagonChartView: UIView {
     private func updatePolygonColor() {
         for (index, polygonLayer) in polygonLayers.enumerated() {
             guard index < model.dataSets.count else { break }
-            let color = UIColor(model.dataSets[index].color.color)
+            let color = UIColor(model.dataSets[index].color.value)
             polygonLayer.fillColor = color.withAlphaComponent(0.4).cgColor
         }
     }

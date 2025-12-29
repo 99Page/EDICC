@@ -22,7 +22,7 @@ struct HexagonStatsTableView: View {
                     ForEach(model.chart.dataSets) { dataSet in
                         HStack(spacing: 4) {
                             Circle()
-                                .fill(dataSet.color.color)
+                                .fill(dataSet.color.value)
                                 .frame(width: 8, height: 8)
                             
                             Text(dataSet.label)
@@ -71,7 +71,7 @@ struct HexagonStatsTableView: View {
         .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
         .sheet(item: $model.selectedDataSet) { dataSet in
             LegendSelectionView(
-                color: model.selectedDataSet == model.chart.dataSets[0] ? $model.chart.dataSets[0].color.color :  $model.chart.dataSets[1].color.color,
+                color: model.selectedDataSet == model.chart.dataSets[0] ? $model.chart.dataSets[0].color.value :  $model.chart.dataSets[1].color.value,
                 bannedColor: model.unselectedColorSet
             ) {
                 EmptyView()

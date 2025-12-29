@@ -7,15 +7,26 @@
 
 import SwiftUI
 
-@MainActor
-class FootballTeamSelectViewModel {
+@Observable
+class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
+    let id = UUID()
     var model = FootballTeamSelectModel()
     var squadVM: FootballSquadViewModel?
     
+    let hexagonTarget: HexagonDataSet
+    
     private var footballService: FootballService
     
-    init(footballService: FootballService = .live) {
+    init(
+        hexagonTarget: HexagonDataSet,
+        footballService: FootballService = .live
+    ) {
+        self.hexagonTarget = hexagonTarget
         self.footballService = footballService
+    }
+    
+    func makeHexagon() -> HexagonDataSet {
+        hexagonTarget
     }
     
     func downArrowTapped() {
@@ -50,10 +61,8 @@ class FootballTeamSelectViewModel {
         
         squadVM = FootballSquadViewModel(
             model: model,
-            footballService: footballService,
-            onPlayerSelected: { [weak self] player in
-                self?.handlePlayerSelected(player)
-            })
+            footballService: footballService
+        )
     }
     
     private func handlePlayerSelected(_ player: FootballPlayer) {
@@ -246,7 +255,10 @@ struct TeamData: Identifiable {
 #Preview {
     ScrollView {
         FootballTeamSelectView(
-            vm: FootballTeamSelectViewModel(footballService: .preview)
+            vm: FootballTeamSelectViewModel(
+                hexagonTarget: .mockAverage(),
+                footballService: .preview
+            )
         )
         .padding(.horizontal)
     }

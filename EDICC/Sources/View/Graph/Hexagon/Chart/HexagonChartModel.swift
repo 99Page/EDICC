@@ -67,7 +67,6 @@ extension HexagonDataSet {
     static func mockPlayer() -> HexagonDataSet {
         return HexagonDataSet(
             label: "Son (23/24)",
-            // 앞서 정의하신 Color Extension을 사용한다고 가정
             color: IdentifiableColor(.creamyOrange),
             points: HexagonDataPoint.mockStiker()
         )
