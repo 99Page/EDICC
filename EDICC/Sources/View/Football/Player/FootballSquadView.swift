@@ -32,6 +32,10 @@ class FootballSquadViewModel {
             }
         }
     }
+    
+    func playerTapped(_ player: FootballPlayer) {
+        
+    }
 }
 
 @Observable

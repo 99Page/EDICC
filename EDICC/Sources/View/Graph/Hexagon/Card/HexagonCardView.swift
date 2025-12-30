@@ -15,13 +15,13 @@ class HexagonCardViewModel {
     }
 }
 
-struct HexagonCardView<VM: Identifiable, LegendView: View>: View {
+struct HexagonCardView<SheetItem: HexagonMaker, SheetContent: View>: View {
     
     
-    @Binding var legendVM: VM?
+    @Binding var legendVM: SheetItem?
     @Bindable var vm: HexagonCardViewModel
     
-    let legendView: (VM) -> LegendView
+    let legendView: (SheetItem) -> SheetContent
     
     var body: some View {
         GeometryReader { proxy in
@@ -33,14 +33,12 @@ struct HexagonCardView<VM: Identifiable, LegendView: View>: View {
                         .frame(width: chartWidth, height: chartHeight, alignment: .top)
                     
                     ChartLegendView(
-                        legendVM: $legendVM,
                         primary: $vm.model.chart.dataSets[0],
-                        secondary: $vm.model.chart.dataSets[1]
-                    ) { vm in
-                        legendView(vm)
-                    } legendSelected: { legend in
-                        vm.selectLegend(legend)
-                    }
+                        secondary: $vm.model.chart.dataSets[1],
+                        selectedItem: $legendVM,
+                        onLegendSelected: vm.selectLegend,
+                        sheetContent: legendView
+                    )
                     
                     HexagonStatsTableView(model: vm.model)
                         .padding(.top, 16)

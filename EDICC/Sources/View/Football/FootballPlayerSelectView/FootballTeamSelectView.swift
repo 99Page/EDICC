@@ -9,6 +9,7 @@ import SwiftUI
 
 @Observable
 class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
+    
     let id = UUID()
     var model = FootballTeamSelectModel()
     var squadVM: FootballSquadViewModel?
@@ -16,13 +17,16 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
     let hexagonTarget: HexagonDataSet
     
     private var footballService: FootballService
+    var legendChanged: (HexagonDataSet, HexagonDataSet) -> Void
     
     init(
         hexagonTarget: HexagonDataSet,
-        footballService: FootballService = .live
+        footballService: FootballService = .preview,
+        legendChanged: @escaping (HexagonDataSet, HexagonDataSet) -> Void
     ) {
         self.hexagonTarget = hexagonTarget
         self.footballService = footballService
+        self.legendChanged = legendChanged
     }
     
     func makeHexagon() -> HexagonDataSet {
@@ -63,10 +67,6 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
             model: model,
             footballService: footballService
         )
-    }
-    
-    private func handlePlayerSelected(_ player: FootballPlayer) {
-        
     }
 }
 
@@ -258,7 +258,7 @@ struct TeamData: Identifiable {
             vm: FootballTeamSelectViewModel(
                 hexagonTarget: .mockAverage(),
                 footballService: .preview
-            )
+            ) { _, _ in }
         )
         .padding(.horizontal)
     }

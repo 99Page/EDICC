@@ -18,6 +18,10 @@ class HexagonChartModel {
     init(dataSets: [HexagonDataSet]) {
         self.dataSets = dataSets
     }
+    
+    func updateDataSet(old: HexagonDataSet, new: HexagonDataSet) {
+        
+    }
 }
 
 extension HexagonChartModel {

@@ -19,11 +19,9 @@ class FootballHexagonCardViewModel {
     }
     
     func showLegendSelectView(_ hexagondDataSet: HexagonDataSet) {
-        teamSelectVM = FootballTeamSelectViewModel(hexagonTarget: hexagondDataSet)
-    }
-    
-    func handle() {
-        
+        teamSelectVM = FootballTeamSelectViewModel(hexagonTarget: hexagondDataSet) { [weak self] in
+            self?.hexagonVM.model.chart.updateDataSet(old: $0, new: $1)
+        }
     }
 }
 

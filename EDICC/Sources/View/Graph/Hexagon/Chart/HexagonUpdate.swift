@@ -7,7 +7,8 @@
 
 import Foundation
 
-protocol HexagonMaker {
+protocol HexagonMaker: Identifiable {
     var hexagonTarget: HexagonDataSet { get }
+    var legendChanged: (_ old: HexagonDataSet, _ new: HexagonDataSet) -> Void { get set }
     func makeHexagon() -> HexagonDataSet
 }
