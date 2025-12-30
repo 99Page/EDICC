@@ -47,7 +47,7 @@ struct HexagonStatsTableView: View {
                         
                         ForEach(model.chart.dataSets) { dataSet in
                             if index < dataSet.points.count {
-                                Text(String(format: "%.1f", dataSet.points[index].value))
+                                Text(String(format: "%.1f", dataSet.points[index].rawValue))
                                     .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.black.opacity(0.5))
                             } else {

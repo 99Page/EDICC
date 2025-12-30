@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct FootballPlayer: Identifiable {
+struct FootballPlayer: Identifiable, AxisDefinable {
+    static var defaultRange: [String : ClosedRange<Double>] = Dictionary(
+        uniqueKeysWithValues: [
+            pair(\FootballPlayer.Stats.General.rating, 0...10),
+            pair(\FootballPlayer.Stats.General.minutes, 0...3600),
+            pair(\FootballPlayer.Stats.Attack.goals, 0...10),
+            pair(\FootballPlayer.Stats.Attack.assists, 0...10),
+            pair(\FootballPlayer.Stats.Defense.blocks, 0...10),
+            pair(\FootballPlayer.Stats.Defense.interceptions, 0...10),
+        ]
+    )
+    
+    static var customRange: [String : ClosedRange<Double>] = {
+        return defaultRange
+    }()
+    
     let id = UUID()
     let name: String
     let country: Country
@@ -51,6 +66,42 @@ struct FootballPlayer: Identifiable {
         self.imageURL = dto.player.photo
     }
     
+    var label: String { name }
+    
+    func hexagonPoints<T: AxisDefinable>(standard: T.Type) -> [HexagonDataPoint] {
+        [
+            HexagonDataPoint(
+                label: (\FootballPlayer.Stats.General.rating).label,
+                rawValue: stats.general.rating,
+                value: T.self
+            ),
+            HexagonDataPoint(
+                label: (\FootballPlayer.Stats.General.minutes).label,
+                rawValue: Double(stats.general.minutes),
+                value: T.self
+            ),
+            HexagonDataPoint(
+                label: (\FootballPlayer.Stats.Attack.goals).label,
+                rawValue: Double(stats.attack.goals),
+                value: T.self
+            ),
+            HexagonDataPoint(
+                label: (\FootballPlayer.Stats.Attack.assists).label,
+                rawValue: Double(stats.attack.assists),
+                value: T.self
+            ),
+            HexagonDataPoint(
+                label: (\FootballPlayer.Stats.Defense.blocks).label,
+                rawValue: Double(stats.defense.blocks),
+                value: T.self
+            ),
+            HexagonDataPoint(
+                label: (\FootballPlayer.Stats.Defense.interceptions).label,
+                rawValue: Double(stats.defense.interceptions),
+                value: T.self
+            ),
+        ]
+    }
 
     struct Stats {
         let general: General

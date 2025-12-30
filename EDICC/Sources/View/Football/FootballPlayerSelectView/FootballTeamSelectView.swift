@@ -29,10 +29,6 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
         self.legendChanged = legendChanged
     }
     
-    func makeHexagon() -> HexagonDataSet {
-        hexagonTarget
-    }
-    
     func downArrowTapped() {
         model.selectedTeam = nil
         model.selectedSeason = nil
@@ -66,7 +62,21 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
         squadVM = FootballSquadViewModel(
             model: model,
             footballService: footballService
+        ) { [weak self] in
+            self?.updateLegend($0)
+        }
+    }
+    
+    private func updateLegend(_ player: FootballPlayer) {
+        let newHexagon = HexagonDataSet(
+            label: player.label,
+            color: hexagonTarget.color,
+            points: player.hexagonPoints(standard: FootballPlayer.self)
         )
+        
+        legendChanged(hexagonTarget, newHexagon)
+        
+        debugPrint("updateLegend")
     }
 }
 

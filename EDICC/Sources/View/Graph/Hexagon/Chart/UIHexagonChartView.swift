@@ -126,7 +126,7 @@ class UIHexagonChartView: UIView {
                 layer: layer,
                 center: center,
                 vertexes: vertexes,
-                values: dataSet.points.map { $0.value },
+                values: dataSet.points.map { CGFloat($0.rawValue) },
                 beginTime: currentTime + delay
             )
         }
@@ -140,7 +140,7 @@ class UIHexagonChartView: UIView {
             let finalPath = RadarPolygon(
                 center: center,
                 vertexes: vertexes,
-                factor: dataSet.points.map { $0.value }
+                factor: dataSet.points.map { CGFloat($0.rawValue) }
             ).path().cgPath
             
             polygonLayers[index].path = finalPath

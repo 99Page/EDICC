@@ -7,17 +7,22 @@
 
 import SwiftUI
 
+@Observable
 class FootballSquadViewModel {
+    
     var model: FootballSquadModel
+    var onPlayerTapped: (_ player: FootballPlayer) -> Void
     
     private let footballService: FootballService
     
     init(
         model: FootballSquadModel,
         footballService: FootballService = .live,
+        playerTapped: @escaping (FootballPlayer) -> Void
     ) {
         self.model = model
         self.footballService = footballService
+        self.onPlayerTapped = playerTapped
     }
     
     func onAppear() {
@@ -33,8 +38,8 @@ class FootballSquadViewModel {
         }
     }
     
-    func playerTapped(_ player: FootballPlayer) {
-        
+    func tapPlayer(_ player: FootballPlayer) {
+        onPlayerTapped(player)
     }
 }
 
@@ -72,7 +77,7 @@ struct FootballSquadView: View {
         LazyVStack(spacing: 12) {
             ForEach(vm.model.players) { player in
                 Button {
-                    
+                    vm.onPlayerTapped(player)
                 } label: {
                     PlayerRowCard(player: player)
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
@@ -179,7 +184,7 @@ struct PlayerRowCard: View {
     let viewModel = FootballSquadViewModel(
         model: model,
         footballService: .preview
-    )
+    ) { _ in }
     
     FootballSquadView(vm: viewModel)
 }

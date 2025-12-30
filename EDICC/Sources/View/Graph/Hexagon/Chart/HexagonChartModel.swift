@@ -20,7 +20,9 @@ class HexagonChartModel {
     }
     
     func updateDataSet(old: HexagonDataSet, new: HexagonDataSet) {
-        
+        if let index = dataSets.firstIndex(where: { $0.id == old.id }) {
+            dataSets[index] = new
+        }
     }
 }
 
@@ -32,30 +34,53 @@ extension HexagonChartModel {
 
 struct HexagonDataPoint: Identifiable, Equatable {
     let label: String
-    var value: CGFloat
+    let rawValue: Double
+    var range: ClosedRange<Double>
     
-    // Identifiable 준수 (라벨을 ID로 사용)
+    init(label: String, rawValue: Double, range: ClosedRange<Double>) {
+        self.label = label
+        self.rawValue = rawValue
+        self.range = range
+    }
+    
+    init(label: String, rawValue: Double, value: AxisDefinable.Type) {
+        self.label = label
+        self.rawValue = rawValue
+        self.range = value.range(for: label)
+    }
+    
     var id: String { label }
     
+    var normalizedValue: Double {
+        let min = range.lowerBound
+        let max = range.upperBound
+        
+        guard max > min else { return 0.0 }
+        let ratio = (rawValue - min) / (max - min)
+        return Swift.max(0.0, Swift.min(ratio, 1.0))
+    }
+    
     static func mockStiker() -> [HexagonDataPoint] {
+        let range: ClosedRange<Double> = 0...1
         return [
-            HexagonDataPoint(label: "PAC", value: 0.92), // 속도
-            HexagonDataPoint(label: "SHO", value: 0.89), // 슈팅
-            HexagonDataPoint(label: "PAS", value: 0.81), // 패스
-            HexagonDataPoint(label: "DRI", value: 0.86), // 드리블
-            HexagonDataPoint(label: "DEF", value: 0.35), // 수비
-            HexagonDataPoint(label: "PHY", value: 0.65)  // 피지컬
+            HexagonDataPoint(label: "PAC", rawValue: 0.92, range: range),
+            HexagonDataPoint(label: "SHO", rawValue: 0.89, range: range),
+            HexagonDataPoint(label: "PAS", rawValue: 0.81, range: range),
+            HexagonDataPoint(label: "DRI", rawValue: 0.86, range: range),
+            HexagonDataPoint(label: "DEF", rawValue: 0.35, range: range),
+            HexagonDataPoint(label: "PHY", rawValue: 0.65, range: range)
         ]
     }
     
     static func mockMidfielder() -> [HexagonDataPoint] {
+        let range: ClosedRange<Double> = 0...1
         return [
-            HexagonDataPoint(label: "PAC", value: 0.75),
-            HexagonDataPoint(label: "SHO", value: 0.70),
-            HexagonDataPoint(label: "PAS", value: 0.88),
-            HexagonDataPoint(label: "DRI", value: 0.82),
-            HexagonDataPoint(label: "DEF", value: 0.65),
-            HexagonDataPoint(label: "PHY", value: 0.78)
+            HexagonDataPoint(label: "PAC", rawValue: 0.75, range: range),
+            HexagonDataPoint(label: "SHO", rawValue: 0.70, range: range),
+            HexagonDataPoint(label: "PAS", rawValue: 0.88, range: range),
+            HexagonDataPoint(label: "DRI", rawValue: 0.82, range: range),
+            HexagonDataPoint(label: "DEF", rawValue: 0.65, range: range),
+            HexagonDataPoint(label: "PHY", rawValue: 0.78, range: range)
         ]
     }
 }

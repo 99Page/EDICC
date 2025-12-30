@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		08CB072A525F98B340B28D0D /* HexagonCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2F26A4CAF3BCBEEC7C768 /* HexagonCardView.swift */; };
 		0A249CD75F5856338AC30892 /* UIHexagonChartView + setupLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07546AF91C91DF695EB1F3FA /* UIHexagonChartView + setupLabels.swift */; };
 		0A7E1A19EB7AE9A2FB55D705 /* HexagonStatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A2C41F79D8BBB3A724A78 /* HexagonStatsTableView.swift */; };
+		0F52ED6AAFC3231920026A0D /* AxisDefinable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4331EA6089CE2E92E54FE16 /* AxisDefinable.swift */; };
 		1184CF9083C078BC1A155029 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 016CFC1E4EBC4027AA45AB9B /* SnapKit */; };
 		134E0A92B2FA1F1437ACC94B /* FootballPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBC0760FD644F6EA842948 /* FootballPlayer.swift */; };
 		1896BC794C9836136A052988 /* GPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF876F67D904E4F45AB2FF1 /* GPD.swift */; };
@@ -47,6 +48,7 @@
 		CBDFE6221B8BA96E5F87FCE2 /* EPLTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */; };
 		D8FADB337F375BE1A4992633 /* FootballLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F27763DDFCE46B980AD20 /* FootballLeague.swift */; };
 		FF45034813745E0CF960A25A /* HexagonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EFDE8AEB4CD631FC164F95 /* HexagonView.swift */; };
+		FFD9D8943F32FD2FE9DF7242 /* KeyPath +.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9BBE5C0F86EA1935B997CC /* KeyPath +.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,11 +119,13 @@
 		9E23FD5327B2407B80EDE02D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCApp.swift; sourceTree = "<group>"; };
 		B0063D87B38D7A6E9D2D186C /* FootballService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballService.swift; sourceTree = "<group>"; };
+		B4331EA6089CE2E92E54FE16 /* AxisDefinable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDefinable.swift; sourceTree = "<group>"; };
 		B44FC3816527394D20EAD078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C6AF3D252B29F3F02D0D09F0 /* RadarPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarPolygon.swift; sourceTree = "<group>"; };
 		CAF876F67D904E4F45AB2FF1 /* GPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPD.swift; sourceTree = "<group>"; };
 		D27A2C41F79D8BBB3A724A78 /* HexagonStatsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonStatsTableView.swift; sourceTree = "<group>"; };
 		D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TuistBundle+EDICC.swift"; sourceTree = "<group>"; };
+		DD9BBE5C0F86EA1935B997CC /* KeyPath +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyPath +.swift"; sourceTree = "<group>"; };
 		E05A322E2D04BB1097249575 /* HexagonCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonCardModel.swift; sourceTree = "<group>"; };
 		E0AA67CA67B986598A751745 /* EDICC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDICC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLTeam.swift; sourceTree = "<group>"; };
@@ -243,6 +247,7 @@
 				3CDCB0BC1F8671DBA7D859C5 /* Card */,
 				B9C501F38942EE9A91D1B0F0 /* Chart */,
 				9684F01E2BAF23BEBF496F45 /* Legend */,
+				B4331EA6089CE2E92E54FE16 /* AxisDefinable.swift */,
 			);
 			path = Hexagon;
 			sourceTree = "<group>";
@@ -405,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				5A0CDC8E68C125019ECB3AE1 /* Array +.swift */,
+				DD9BBE5C0F86EA1935B997CC /* KeyPath +.swift */,
 			);
 			path = "Swift +";
 			sourceTree = "<group>";
@@ -547,6 +553,7 @@
 				6A5DBAEE6E0013024FEDA3DA /* Country.swift in Sources */,
 				36B4238E3D661A3996BD1709 /* IdentifiableColor.swift in Sources */,
 				9E3D03CE65D8B23E30A0CD72 /* Array +.swift in Sources */,
+				FFD9D8943F32FD2FE9DF7242 /* KeyPath +.swift in Sources */,
 				34725CFDAE5386E566300458 /* UIColor + extensions.swift in Sources */,
 				AA17DDFFA3CE165FEC28380E /* ColorSelectionView.swift in Sources */,
 				CBDFE6221B8BA96E5F87FCE2 /* EPLTeam.swift in Sources */,
@@ -567,6 +574,7 @@
 				62D24DA8A7E5AC7FB827ABB2 /* UIHexagonChartView.swift in Sources */,
 				000233B210711F8D0573A1EA /* LegendBadgeView.swift in Sources */,
 				26394FA1B8A5EDF580EAB8A1 /* LegendSelectionView.swift in Sources */,
+				0F52ED6AAFC3231920026A0D /* AxisDefinable.swift in Sources */,
 				FF45034813745E0CF960A25A /* HexagonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -603,10 +611,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -745,10 +750,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
