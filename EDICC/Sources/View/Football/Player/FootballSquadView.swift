@@ -180,7 +180,7 @@ struct PlayerRowCard: View {
 }
 
 #Preview {
-    var model = FootballSquadModel(targetSeason: 2021, team: .liverpool)
+    let model = FootballSquadModel(targetSeason: 2021, team: .liverpool)
     let viewModel = FootballSquadViewModel(
         model: model,
         footballService: .preview

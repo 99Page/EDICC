@@ -54,15 +54,15 @@ struct FootballStatisticsResponse: Decodable {
             Statistic(
                 team: .manchesterUnited(),
                 league: .premierLeague(),
-                games: .stub(),
+                games: .stub,
                 shots: .stub(),
-                goals: .stub(),
+                goals: .stub,
                 passes: .stub(),
                 duels: .stub(),
                 dribbles: .stub(),
                 fouls: .stub(),
                 cards: .stub(),
-                tackles: .stub()
+                tackles: .stub
             )
         }
     }
@@ -71,12 +71,28 @@ struct FootballStatisticsResponse: Decodable {
     struct Tackles: Decodable {
         let total, blocks, interceptions: Int?
         
-        static func stub() -> Tackles {
-            Tackles(total: 26, blocks: 4, interceptions: 10)
+        static var stub: Tackles {
+            let isDefensiveRole = Bool.random()
+            
+            if isDefensiveRole {
+                // 🛡️ 수비형 선수: 태클, 블락, 인터셉트가 높음
+                return Tackles(
+                    total: Int.random(in: 40...130),       // 시즌 총 태클
+                    blocks: Int.random(in: 15...50),       // 블락
+                    interceptions: Int.random(in: 30...80) // 가로채기
+                )
+            } else {
+                // 🏃 공격형 선수: 수비 지표가 상대적으로 낮음
+                return Tackles(
+                    total: Int.random(in: 5...35),
+                    blocks: Int.random(in: 0...10),
+                    interceptions: Int.random(in: 2...25)
+                )
+            }
         }
     }
-
-
+    
+    
     // MARK: - Cards
     struct Cards: Codable {
         let yellow, yellowred, red: Int?
@@ -85,7 +101,7 @@ struct FootballStatisticsResponse: Decodable {
             Cards(yellow: 9, yellowred: nil, red: 0)
         }
     }
-
+    
     // MARK: - Dribbles
     struct Dribbles: Codable {
         let attempts, success: Int?
@@ -94,7 +110,7 @@ struct FootballStatisticsResponse: Decodable {
             Dribbles(attempts: 40, success: 19)
         }
     }
-
+    
     // MARK: - Duels
     struct Duels: Codable {
         let total, won: Int?
@@ -103,7 +119,7 @@ struct FootballStatisticsResponse: Decodable {
             Duels(total: 316, won: 136)
         }
     }
-
+    
     // MARK: - Fouls
     struct Fouls: Codable {
         let drawn, committed: Int?
@@ -112,7 +128,7 @@ struct FootballStatisticsResponse: Decodable {
             Fouls(drawn: 28, committed: 41)
         }
     }
-
+    
     // MARK: - Games
     struct Games: Codable {
         let appearences, lineups, minutes: Int?
@@ -120,27 +136,53 @@ struct FootballStatisticsResponse: Decodable {
         let rating: String?
         let captain: Bool
         
-        static func stub() -> Games {
-            Games(
-                appearences: 35,
-                lineups: 35,
-                minutes: 3119,
-                position: "Midfielder",
-                rating: "7.780000",
-                captain: false
+        static var stub: Games {
+            let appearances = Int.random(in: 1...38)
+            let lineups = Int.random(in: 15...appearances)
+            
+            let subAppearances = appearances - lineups
+            let calculatedMinutes = (lineups * Int.random(in: 70...90)) + (subAppearances * Int.random(in: 10...30))
+            
+            let positions = ["Goalkeeper", "Defender", "Midfielder", "Attacker"]
+            let position = positions.randomElement() ?? "Midfielder"
+            
+            let ratingValue = Double.random(in: 6.0...9.5)
+            let ratingString = String(format: "%.6f", ratingValue)
+            
+            return Games(
+                appearences: appearances,
+                lineups: lineups,
+                minutes: calculatedMinutes,
+                position: position,
+                rating: ratingString,
+                captain: Bool.random()
             )
         }
     }
-
+    
     // MARK: - Goals
     struct Goals: Codable {
         let total, conceded, assists: Int?
         
-        static func stub() -> Goals {
-            Goals(total: 8, conceded: 0, assists: 8)
+        static var stub: Goals {
+            let isGoalkeeper = Int.random(in: 1...10) <= 2
+            
+            if isGoalkeeper {
+                return Goals(
+                    total: 0,
+                    conceded: Int.random(in: 20...60),
+                    assists: Int.random(in: 0...2)
+                )
+            } else {
+                return Goals(
+                    total: Int.random(in: 0...35),
+                    conceded: 0,
+                    assists: Int.random(in: 0...20)   
+                )
+            }
         }
     }
-
+    
     // MARK: - League
     struct League: Codable {
         let id: Int?
@@ -161,7 +203,7 @@ struct FootballStatisticsResponse: Decodable {
             )
         }
     }
-
+    
     // MARK: - Passes
     struct Passes: Codable {
         let total, key: Int?
@@ -170,8 +212,8 @@ struct FootballStatisticsResponse: Decodable {
             Passes(total: 1912, key: 116)
         }
     }
-
-
+    
+    
     // MARK: - Shots
     struct Shots: Decodable {
         let total, on: Int?
@@ -183,7 +225,7 @@ struct FootballStatisticsResponse: Decodable {
             )
         }
     }
-
+    
     // MARK: - Team
     struct Team: Codable {
         let id: Int

@@ -19,10 +19,10 @@ class HexagonCardModel {
     var unselectedColorSet: Set<IdentifiableColor> {
         guard let selectedDataSet else { return [] }
         
-        if selectedDataSet == chart.dataSets.first {
-            return [chart.dataSets[1].color]
+        if selectedDataSet == chart.primary {
+            return [chart.secondary.color]
         } else {
-            return [chart.dataSets[0].color]
+            return [chart.primary.color]
         }
     }
 }

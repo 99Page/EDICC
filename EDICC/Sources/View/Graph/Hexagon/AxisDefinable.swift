@@ -31,11 +31,10 @@ extension AxisDefinable {
         if let userValue = customRange[key.lowercased()] { return userValue }
         if let defaultValue = defaultRange[key.lowercased()] { return defaultValue }
         
-#if DEBUG
+        #if DEBUG
         fatalError("🚨 '\(key)' 키에 대한 범위가 없습니다. defaultRange에 추가해주세요.")
-#else
-        // ⭐️ 배포 버전: 죽이면 안 되니까 안전빵 값 리턴 (혹은 로그 전송)
+        #else
         return 0.0...100.0
-#endif
+        #endif
     }
 }

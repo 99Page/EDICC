@@ -9,26 +9,38 @@ import Foundation
 
 @Observable
 class HexagonChartModel {
-    var dataSets: [HexagonDataSet]
+    var primary: HexagonDataSet
+    var secondary: HexagonDataSet
     
-    var axisLabels: [String] {
-        return dataSets.first?.points.map { $0.label } ?? []
+    var dataSets: [HexagonDataSet] {
+        [primary, secondary]
     }
     
-    init(dataSets: [HexagonDataSet]) {
-        self.dataSets = dataSets
+    var hasPoints: Bool {
+        !primary.points.isEmpty && !secondary.points.isEmpty
+    }
+    
+    var axisLabels: [String] {
+        return primary.points.map { $0.label }
+    }
+    
+    init(primary: HexagonDataSet, secondary: HexagonDataSet) {
+        self.primary = primary
+        self.secondary = secondary
     }
     
     func updateDataSet(old: HexagonDataSet, new: HexagonDataSet) {
-        if let index = dataSets.firstIndex(where: { $0.id == old.id }) {
-            dataSets[index] = new
+        if primary.id == old.id {
+            primary = new
+        } else if secondary.id == old.id {
+            secondary = new
         }
     }
 }
 
 extension HexagonChartModel {
     static func mock() -> HexagonChartModel {
-        HexagonChartModel(dataSets: [.mockPlayer() ,.mockAverage()])
+        HexagonChartModel(primary: .mockPlayer(), secondary: .mockAverage())
     }
 }
 

@@ -14,14 +14,14 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
     var model = FootballTeamSelectModel()
     var squadVM: FootballSquadViewModel?
     
-    let hexagonTarget: HexagonDataSet
+    var hexagonTarget: HexagonDataSet
     
     private var footballService: FootballService
     var legendChanged: (HexagonDataSet, HexagonDataSet) -> Void
     
     init(
         hexagonTarget: HexagonDataSet,
-        footballService: FootballService = .preview,
+        footballService: FootballService = .live,
         legendChanged: @escaping (HexagonDataSet, HexagonDataSet) -> Void
     ) {
         self.hexagonTarget = hexagonTarget
@@ -63,20 +63,18 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
             model: model,
             footballService: footballService
         ) { [weak self] in
-            self?.updateLegend($0)
+            self?.onPlayerSelected($0)
         }
     }
     
-    private func updateLegend(_ player: FootballPlayer) {
+    private  func onPlayerSelected(_ player: FootballPlayer) {
         let newHexagon = HexagonDataSet(
             label: player.label,
             color: hexagonTarget.color,
             points: player.hexagonPoints(standard: FootballPlayer.self)
         )
         
-        legendChanged(hexagonTarget, newHexagon)
-        
-        debugPrint("updateLegend")
+        updateHexagon(new: newHexagon)
     }
 }
 

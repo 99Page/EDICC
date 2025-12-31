@@ -71,7 +71,7 @@ struct HexagonStatsTableView: View {
         .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
         .sheet(item: $model.selectedDataSet) { dataSet in
             LegendSelectionView(
-                color: model.selectedDataSet == model.chart.dataSets[0] ? $model.chart.dataSets[0].color.value :  $model.chart.dataSets[1].color.value,
+                color: model.selectedDataSet == model.chart.primary ? $model.chart.primary.color.value :  $model.chart.secondary.color.value,
                 bannedColor: model.unselectedColorSet
             ) {
                 EmptyView()

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,7 +13,6 @@
 		08CB072A525F98B340B28D0D /* HexagonCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB2F26A4CAF3BCBEEC7C768 /* HexagonCardView.swift */; };
 		0A249CD75F5856338AC30892 /* UIHexagonChartView + setupLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07546AF91C91DF695EB1F3FA /* UIHexagonChartView + setupLabels.swift */; };
 		0A7E1A19EB7AE9A2FB55D705 /* HexagonStatsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27A2C41F79D8BBB3A724A78 /* HexagonStatsTableView.swift */; };
-		0F52ED6AAFC3231920026A0D /* AxisDefinable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4331EA6089CE2E92E54FE16 /* AxisDefinable.swift */; };
 		1184CF9083C078BC1A155029 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 016CFC1E4EBC4027AA45AB9B /* SnapKit */; };
 		134E0A92B2FA1F1437ACC94B /* FootballPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDBC0760FD644F6EA842948 /* FootballPlayer.swift */; };
 		1896BC794C9836136A052988 /* GPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF876F67D904E4F45AB2FF1 /* GPD.swift */; };
@@ -31,6 +30,7 @@
 		39D61D083058F141AB0A4B74 /* FootballHexagonCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8765432282FCFB311289DBD6 /* FootballHexagonCardView.swift */; };
 		5409C8D28637834CF2F2B78F /* TuistBundle+EDICC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BE32D6A58C382444DFF68E /* TuistBundle+EDICC.swift */; };
 		55293652F69DD49FEE0F494B /* SeasonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BB9C2EA78014CC590CAB6 /* SeasonSelectView.swift */; };
+		5987103B191408C8CADDF16F /* AxisDefinable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4281FD93019326978B561500 /* AxisDefinable.swift */; };
 		62D24DA8A7E5AC7FB827ABB2 /* UIHexagonChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FCD42F7C9A5E25EDA9B7F /* UIHexagonChartView.swift */; };
 		6905FDB3E2D36D78BC706166 /* FootballSelectionSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E30685F5FC337ED33D9687 /* FootballSelectionSummaryView.swift */; };
 		6A5DBAEE6E0013024FEDA3DA /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797D6BF2A70140B20EEF0F27 /* Country.swift */; };
@@ -96,6 +96,7 @@
 		2E4863A23BD5F36373B3617C /* FootballPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballPosition.swift; sourceTree = "<group>"; };
 		3505DEFF81E344E253E46722 /* FootballStatisticsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballStatisticsResponse.swift; sourceTree = "<group>"; };
 		3905FC9631262A11C190FFAA /* TurtlePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurtlePath.swift; sourceTree = "<group>"; };
+		4281FD93019326978B561500 /* AxisDefinable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDefinable.swift; sourceTree = "<group>"; };
 		47E30685F5FC337ED33D9687 /* FootballSelectionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSelectionSummaryView.swift; sourceTree = "<group>"; };
 		4BA4AB95BF5AAC1CC7AA3ADD /* EDICCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EDICCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D92B35C1A627B4E22770CAD /* ColorSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectionView.swift; sourceTree = "<group>"; };
@@ -119,7 +120,6 @@
 		9E23FD5327B2407B80EDE02D /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		A09EAFC27D6C584DD9F15B0C /* EDICCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EDICCApp.swift; sourceTree = "<group>"; };
 		B0063D87B38D7A6E9D2D186C /* FootballService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballService.swift; sourceTree = "<group>"; };
-		B4331EA6089CE2E92E54FE16 /* AxisDefinable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AxisDefinable.swift; sourceTree = "<group>"; };
 		B44FC3816527394D20EAD078 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C6AF3D252B29F3F02D0D09F0 /* RadarPolygon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarPolygon.swift; sourceTree = "<group>"; };
 		CAF876F67D904E4F45AB2FF1 /* GPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPD.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 				3CDCB0BC1F8671DBA7D859C5 /* Card */,
 				B9C501F38942EE9A91D1B0F0 /* Chart */,
 				9684F01E2BAF23BEBF496F45 /* Legend */,
-				B4331EA6089CE2E92E54FE16 /* AxisDefinable.swift */,
+				4281FD93019326978B561500 /* AxisDefinable.swift */,
 			);
 			path = Hexagon;
 			sourceTree = "<group>";
@@ -564,6 +564,7 @@
 				134E0A92B2FA1F1437ACC94B /* FootballPlayer.swift in Sources */,
 				1D5D26E4F33ACFD3D9A35978 /* FootballSquadView.swift in Sources */,
 				55293652F69DD49FEE0F494B /* SeasonSelectView.swift in Sources */,
+				5987103B191408C8CADDF16F /* AxisDefinable.swift in Sources */,
 				01F158C564A1E532106D1A72 /* HexagonCardModel.swift in Sources */,
 				08CB072A525F98B340B28D0D /* HexagonCardView.swift in Sources */,
 				0A7E1A19EB7AE9A2FB55D705 /* HexagonStatsTableView.swift in Sources */,
@@ -574,7 +575,6 @@
 				62D24DA8A7E5AC7FB827ABB2 /* UIHexagonChartView.swift in Sources */,
 				000233B210711F8D0573A1EA /* LegendBadgeView.swift in Sources */,
 				26394FA1B8A5EDF580EAB8A1 /* LegendSelectionView.swift in Sources */,
-				0F52ED6AAFC3231920026A0D /* AxisDefinable.swift in Sources */,
 				FF45034813745E0CF960A25A /* HexagonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -611,7 +611,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -750,7 +753,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

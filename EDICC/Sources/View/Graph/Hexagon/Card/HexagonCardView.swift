@@ -33,8 +33,8 @@ struct HexagonCardView<SheetItem: HexagonMaker, SheetContent: View>: View {
                         .frame(width: chartWidth, height: chartHeight, alignment: .top)
                     
                     ChartLegendView(
-                        primary: $vm.model.chart.dataSets[0],
-                        secondary: $vm.model.chart.dataSets[1],
+                        primary: $vm.model.chart.primary,
+                        secondary: $vm.model.chart.secondary,
                         selectedItem: $legendVM,
                         onLegendSelected: vm.selectLegend,
                         sheetContent: legendView

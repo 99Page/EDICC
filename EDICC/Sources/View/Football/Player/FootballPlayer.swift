@@ -12,10 +12,10 @@ struct FootballPlayer: Identifiable, AxisDefinable {
         uniqueKeysWithValues: [
             pair(\FootballPlayer.Stats.General.rating, 0...10),
             pair(\FootballPlayer.Stats.General.minutes, 0...3600),
-            pair(\FootballPlayer.Stats.Attack.goals, 0...10),
-            pair(\FootballPlayer.Stats.Attack.assists, 0...10),
-            pair(\FootballPlayer.Stats.Defense.blocks, 0...10),
-            pair(\FootballPlayer.Stats.Defense.interceptions, 0...10),
+            pair(\FootballPlayer.Stats.Attack.goals, 0...35),
+            pair(\FootballPlayer.Stats.Attack.assists, 0...20),
+            pair(\FootballPlayer.Stats.Defense.blocks, 0...50),
+            pair(\FootballPlayer.Stats.Defense.interceptions, 0...70),
         ]
     )
     
