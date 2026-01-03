@@ -8,7 +8,7 @@
 import SwiftUI
 
 @Observable
-class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
+class FootballTeamSelectViewModel: Identifiable, HexagonUpdatable {
     
     let id = UUID()
     var model = FootballTeamSelectModel()
@@ -17,7 +17,7 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
     var hexagonTarget: HexagonDataSet
     
     private var footballService: FootballService
-    var legendChanged: (HexagonDataSet, HexagonDataSet) -> Void
+    var onLegendChanged: (HexagonDataSet, HexagonDataSet) -> Void
     
     init(
         hexagonTarget: HexagonDataSet,
@@ -26,7 +26,7 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
     ) {
         self.hexagonTarget = hexagonTarget
         self.footballService = footballService
-        self.legendChanged = legendChanged
+        self.onLegendChanged = legendChanged
     }
     
     func downArrowTapped() {
@@ -43,13 +43,7 @@ class FootballTeamSelectViewModel: Identifiable, HexagonMaker {
             let needsSeasonUpdate = model.selectedTeam != team
             
             model.selectedTeam = team
-            
-            Task {
-                if needsSeasonUpdate {
-                    let response = try await footballService.fetchAvailableSeason(team.id)
-                    model.availableSeasons = response.response
-                }
-            }
+            model.availableSeasons = [2023, 2022, 2021]
         }
     }
     
@@ -85,7 +79,7 @@ class FootballTeamSelectModel {
     
     var availableSeasons: [Int] = []
     
-    var isSeansomTeamSelected: Bool {
+    var isSeansonTeamSelected: Bool {
         selectedTeam != nil && selectedSeason != nil
     }
     
@@ -95,7 +89,7 @@ class FootballTeamSelectModel {
 struct FootballTeamSelectView: View {
     
     @Namespace private var animation
-    @State private var vm: FootballTeamSelectViewModel
+    let vm: FootballTeamSelectViewModel
     
     let teamColumns = [
         GridItem(.flexible(), spacing: 16),
@@ -110,9 +104,10 @@ struct FootballTeamSelectView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            if !vm.model.isSeansomTeamSelected {
+            if !vm.model.isSeansonTeamSelected {
                 selectView
                     .matchedGeometryEffect(id: "morph", in: animation)
+                    .zIndex(1)
             }
             
             if let selectedTeam = vm.model.selectedTeam,
@@ -135,9 +130,10 @@ struct FootballTeamSelectView: View {
                     FootballSquadView(vm: squadVM)
                 }
                 .matchedGeometryEffect(id: "morph", in: animation)
+                .zIndex(2)
             }
         }
-        .padding(.top, vm.model.isSeansomTeamSelected ? 0 : 20)
+        .padding(.top, vm.model.isSeansonTeamSelected ? 0 : 20)
     }
     
     var selectView: some View {

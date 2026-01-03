@@ -45,6 +45,8 @@ extension HexagonChartModel {
 }
 
 struct HexagonDataPoint: Identifiable, Equatable {
+    
+    var id: String { label }
     let label: String
     let rawValue: Double
     var range: ClosedRange<Double>
@@ -60,8 +62,6 @@ struct HexagonDataPoint: Identifiable, Equatable {
         self.rawValue = rawValue
         self.range = value.range(for: label)
     }
-    
-    var id: String { label }
     
     var normalizedValue: Double {
         let min = range.lowerBound
@@ -98,10 +98,22 @@ struct HexagonDataPoint: Identifiable, Equatable {
 }
 
 struct HexagonDataSet: Identifiable, Equatable {
-    let id = UUID()
+    let id: UUID
     let label: String
     var color: IdentifiableColor
     var points: [HexagonDataPoint]
+    
+    init(
+        id: UUID = UUID(), // 기본값은 생성하지만, 복사 시에는 기존 ID를 넣을 수 있음
+        label: String,
+        color: IdentifiableColor,
+        points: [HexagonDataPoint]
+    ) {
+        self.id = id
+        self.label = label
+        self.color = color
+        self.points = points
+    }
 }
 
 extension HexagonDataSet {

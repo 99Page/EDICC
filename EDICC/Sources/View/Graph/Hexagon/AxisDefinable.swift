@@ -28,6 +28,7 @@ extension AxisDefinable {
     }
     
     static func range(for key: String) -> ClosedRange<Double> {
+        let key = key.lowercased()
         if let userValue = customRange[key.lowercased()] { return userValue }
         if let defaultValue = defaultRange[key.lowercased()] { return defaultValue }
         

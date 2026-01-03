@@ -109,8 +109,19 @@ class UIHexagonChartView: UIView {
             lastSecondaryId = currentSecondaryId
             
         } else {
-            updatePrimaryPolygon(center: outerHexagon.center, vertexes: convertedVertexes)
-            updateSecondaryPolygon(center: outerHexagon.center, vertexes: convertedVertexes)
+            let isPrimaryChanged = currentPrimaryId != lastPrimaryId
+            let isSecondaryChanged = currentSecondaryId != lastSecondaryId
+            
+            if isPrimaryChanged || isSecondaryChanged {
+                updatePrimaryPolygon(center: outerHexagon.center, vertexes: convertedVertexes)
+                updateSecondaryPolygon(center: outerHexagon.center, vertexes: convertedVertexes)
+            } else {
+                // 화면 리사이징 대응 (디바이스 회전 등)
+                updatePathsWithoutAnimation(
+                    center: outerHexagon.center,
+                    vertexes: convertedVertexes
+                )
+            }
         }
         
         updatePolygonColor()
@@ -195,7 +206,7 @@ class UIHexagonChartView: UIView {
         let secondaryPath = RadarPolygon(
             center: center,
             vertexes: vertexes,
-            factor: model.primary.points.map { CGFloat($0.normalizedValue)}
+            factor: model.secondary.points.map { CGFloat($0.normalizedValue)}
         ).path().cgPath
         
         secondaryPolygonLayer.path = secondaryPath

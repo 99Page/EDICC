@@ -23,7 +23,7 @@ struct FootballPlayer: Identifiable, AxisDefinable {
         return defaultRange
     }()
     
-    let id = UUID()
+    let id: Int
     let name: String
     let country: Country
     let position: FootballPosition?
@@ -31,12 +31,14 @@ struct FootballPlayer: Identifiable, AxisDefinable {
     let stats: Stats
     
     init(
+        id: Int,
         name: String,
         country: Country,
         position: FootballPosition,
         imageURL: String?,
         stats: Stats
     ) {
+        self.id = id
         self.name = name
         self.country = country
         self.position = position
@@ -45,8 +47,11 @@ struct FootballPlayer: Identifiable, AxisDefinable {
     }
     
     init(dto: FootballStatisticsResponse.Response) {
+        
+        self.id = dto.player.id
         self.name = dto.player.name
         self.country = .init(from: dto.player.nationality)
+        self.imageURL = dto.player.photo
         
         let eplID = FootballLeague.epl.id
         let eplStats = dto.statistics.first { $0.league.id == eplID }
@@ -62,8 +67,6 @@ struct FootballPlayer: Identifiable, AxisDefinable {
             self.position = nil
             self.stats = Stats()
         }
-        
-        self.imageURL = dto.player.photo
     }
     
     var label: String { name }

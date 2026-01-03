@@ -17,7 +17,7 @@ struct HexagonStatsTableView: View {
                     Text("지표")
                         .font(.system(size: 14, weight: .bold))
                         .foregroundColor(.black)
-                        .gridColumnAlignment(.leading) // 첫 열은 왼쪽 정렬
+                        .gridColumnAlignment(.leading)
                     
                     ForEach(model.chart.dataSets) { dataSet in
                         HStack(spacing: 4) {
@@ -29,7 +29,7 @@ struct HexagonStatsTableView: View {
                                 .font(.system(size: 14, weight: .bold))
                                 .foregroundColor(.black)
                         }
-                        .gridColumnAlignment(.trailing) // 수치 열은 오른쪽 정렬
+                        .gridColumnAlignment(.trailing)
                         .onTapGesture {
                             model.selectedDataSet = dataSet
                         }
@@ -69,14 +69,6 @@ struct HexagonStatsTableView: View {
         .background(Color.white)
         .cornerRadius(16)
         .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
-        .sheet(item: $model.selectedDataSet) { dataSet in
-            LegendSelectionView(
-                color: model.selectedDataSet == model.chart.primary ? $model.chart.primary.color.value :  $model.chart.secondary.color.value,
-                bannedColor: model.unselectedColorSet
-            ) {
-                EmptyView()
-            }
-        }
     }
 }
 

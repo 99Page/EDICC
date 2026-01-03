@@ -14,12 +14,12 @@ class FootballHexagonCardViewModel {
     
     init() {
         hexagonVM.legendSelected = { [weak self] hexagon in
-            self?.showLegendSelectView(hexagon)
+            self?.setupSelectionVM(hexagon)
         }
     }
     
-    func showLegendSelectView(_ hexagondDataSet: HexagonDataSet) {
-        teamSelectVM = FootballTeamSelectViewModel(hexagonTarget: hexagondDataSet) { [weak self] in
+    func setupSelectionVM(_ hexagonDataSet: HexagonDataSet) {
+        teamSelectVM = FootballTeamSelectViewModel(hexagonTarget: hexagonDataSet) { [weak self] in
             self?.hexagonVM.model.chart.updateDataSet(old: $0, new: $1)
         }
     }

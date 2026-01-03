@@ -11,41 +11,54 @@ class HexagonCardViewModel {
     }
     
     func selectLegend(_ hexagon: HexagonDataSet) {
+        model.selectedDataSet = hexagon
         legendSelected?(hexagon)
     }
 }
 
-struct HexagonCardView<SheetItem: HexagonMaker, SheetContent: View>: View {
+struct HexagonCardView<SheetItem: HexagonUpdatable, SheetContent: View>: View {
     
     
     @Binding var legendVM: SheetItem?
     @Bindable var vm: HexagonCardViewModel
     
-    let legendView: (SheetItem) -> SheetContent
+    @ViewBuilder let legendView: (SheetItem) -> SheetContent
     
     var body: some View {
-        GeometryReader { proxy in
-            let chartHeight = proxy.size.height / 2
-            let chartWidth = proxy.size.width
-            ScrollView {
-                VStack(spacing: 0) {
-                    HexagonChartView(data: vm.model.chart)
-                        .frame(width: chartWidth, height: chartHeight, alignment: .top)
-                    
-                    ChartLegendView(
-                        primary: $vm.model.chart.primary,
-                        secondary: $vm.model.chart.secondary,
-                        selectedItem: $legendVM,
-                        onLegendSelected: vm.selectLegend,
-                        sheetContent: legendView
-                    )
-                    
-                    HexagonStatsTableView(model: vm.model)
-                        .padding(.top, 16)
-                        .padding(.horizontal, 16)
-                }
+        ScrollView {
+            VStack(spacing: 0) {
+                HexagonChartView(data: vm.model.chart)
+                    .aspectRatio(1.2, contentMode: .fit)
+                
+                ChartLegendView(
+                    primary: $vm.model.chart.primary,
+                    secondary: $vm.model.chart.secondary,
+                    onLegendSelected: vm.selectLegend,
+                )
+                
+                HexagonStatsTableView(model: vm.model)
+                    .padding(.top, 16)
+                    .padding(.horizontal, 16)
             }
         }
+        .sheet(item: $legendVM) { item in
+            legendSheet(sheetVM: item)
+        }
+    }
+    
+    /// 시트 내부 컨텐츠 생성 로직
+    @ViewBuilder
+    func legendSheet(sheetVM: SheetItem) -> some View {
+        // 복잡한 삼항 연산자를 변수로 분리
+        let targetColor = vm.model.isPrimarySelected ? $vm.model.chart.primary.color.value : $vm.model.chart.secondary.color.value
+        
+        LegendSelectionView(
+            color: targetColor,
+            bannedColor: vm.model.bannedColors
+        ) {
+            legendView(sheetVM)
+        }
+        .presentationDragIndicator(.visible)
     }
 }
 

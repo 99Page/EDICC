@@ -12,17 +12,23 @@ class HexagonCardModel {
     var chart: HexagonChartModel
     var selectedDataSet: HexagonDataSet?
     
-    init() {
-        chart = HexagonChartModel.mock()
+    init(chart: HexagonChartModel = .mock()) {
+        self.chart = chart
     }
     
-    var unselectedColorSet: Set<IdentifiableColor> {
+    var bannedColors: Set<IdentifiableColor> {
         guard let selectedDataSet else { return [] }
         
-        if selectedDataSet == chart.primary {
+        if selectedDataSet.id == chart.primary.id {
             return [chart.secondary.color]
-        } else {
+        } else if selectedDataSet.id == chart.secondary.id {
             return [chart.primary.color]
+        } else {
+            return []
         }
+    }
+    
+    var isPrimarySelected: Bool {
+        selectedDataSet?.id == chart.primary.id
     }
 }

@@ -27,7 +27,7 @@ class FootballSquadViewModel {
     
     func onAppear() {
         guard model.players.isEmpty else { return }
-
+        
         Task {
             do {
                 let response = try await footballService.fetchStatistics(model.targetSeason, model.team.id)
@@ -47,7 +47,6 @@ class FootballSquadViewModel {
 class FootballSquadModel {
     let targetSeason: Int
     var team: EPLTeam
-    var positionFilter: FootballPosition = .all
     var players: [FootballPlayer] = []
     
     init(targetSeason: Int, team: EPLTeam) {
@@ -62,52 +61,17 @@ struct FootballSquadView: View {
     let vm: FootballSquadViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
-            headerView
-                .padding(.top, 10)
-            
-            playerList
-        }
-        .onAppear {
-            vm.onAppear()
-        }
-    }
-    
-    var playerList: some View {
         LazyVStack(spacing: 12) {
             ForEach(vm.model.players) { player in
                 Button {
                     vm.onPlayerTapped(player)
                 } label: {
                     PlayerRowCard(player: player)
-                        .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }
             }
         }
-    }
-    
-    var headerView: some View {
-        HStack {
-            Text("Squad List")
-                .font(.system(size: 22, weight: .semibold, design: .rounded))
-                .foregroundColor(.primary)
-                .layoutPriority(1)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(FootballPosition.allCases, id: \.self) { position in
-                        PositionFilterButton(
-                            position: position.rawValue,
-                            isSelected: vm.model.positionFilter == position,
-                            color: vm.model.team.color
-                        ) {
-                            withAnimation(.spring()) {
-                                vm.model.positionFilter = position
-                            }
-                        }
-                    }
-                }
-            }
+        .onAppear {
+            vm.onAppear()
         }
     }
 }

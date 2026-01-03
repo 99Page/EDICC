@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,7 +42,7 @@
 		87335592B95AAE7A4800CFB6 /* HexagonChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ECD4513D33EE313CF4D016 /* HexagonChartModel.swift */; };
 		9A926A408C9614DAFE79D7AB /* FootballService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0063D87B38D7A6E9D2D186C /* FootballService.swift */; };
 		9E3D03CE65D8B23E30A0CD72 /* Array +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CDC8E68C125019ECB3AE1 /* Array +.swift */; };
-		A07C69CA0814EAB070D2B205 /* HexagonUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F378877C7F9A9BBCF16F4A3C /* HexagonUpdate.swift */; };
+		A07C69CA0814EAB070D2B205 /* HexagonUpdatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F378877C7F9A9BBCF16F4A3C /* HexagonUpdatable.swift */; };
 		A32287AA24EBDE3A89E1B8ED /* FootballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4863A23BD5F36373B3617C /* FootballPosition.swift */; };
 		AA17DDFFA3CE165FEC28380E /* ColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92B35C1A627B4E22770CAD /* ColorSelectionView.swift */; };
 		CBDFE6221B8BA96E5F87FCE2 /* EPLTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */; };
@@ -129,7 +129,7 @@
 		E05A322E2D04BB1097249575 /* HexagonCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonCardModel.swift; sourceTree = "<group>"; };
 		E0AA67CA67B986598A751745 /* EDICC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDICC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLTeam.swift; sourceTree = "<group>"; };
-		F378877C7F9A9BBCF16F4A3C /* HexagonUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonUpdate.swift; sourceTree = "<group>"; };
+		F378877C7F9A9BBCF16F4A3C /* HexagonUpdatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonUpdatable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +248,7 @@
 				B9C501F38942EE9A91D1B0F0 /* Chart */,
 				9684F01E2BAF23BEBF496F45 /* Legend */,
 				4281FD93019326978B561500 /* AxisDefinable.swift */,
+				F378877C7F9A9BBCF16F4A3C /* HexagonUpdatable.swift */,
 			);
 			path = Hexagon;
 			sourceTree = "<group>";
@@ -373,7 +374,6 @@
 			children = (
 				64ECD4513D33EE313CF4D016 /* HexagonChartModel.swift */,
 				00B72F4D9C22419CE14A53C9 /* HexagonChartView.swift */,
-				F378877C7F9A9BBCF16F4A3C /* HexagonUpdate.swift */,
 				07546AF91C91DF695EB1F3FA /* UIHexagonChartView + setupLabels.swift */,
 				8C1FCD42F7C9A5E25EDA9B7F /* UIHexagonChartView.swift */,
 			);
@@ -570,7 +570,7 @@
 				0A7E1A19EB7AE9A2FB55D705 /* HexagonStatsTableView.swift in Sources */,
 				87335592B95AAE7A4800CFB6 /* HexagonChartModel.swift in Sources */,
 				366AC68B4FE541FA4C67E4FF /* HexagonChartView.swift in Sources */,
-				A07C69CA0814EAB070D2B205 /* HexagonUpdate.swift in Sources */,
+				A07C69CA0814EAB070D2B205 /* HexagonUpdatable.swift in Sources */,
 				0A249CD75F5856338AC30892 /* UIHexagonChartView + setupLabels.swift in Sources */,
 				62D24DA8A7E5AC7FB827ABB2 /* UIHexagonChartView.swift in Sources */,
 				000233B210711F8D0573A1EA /* LegendBadgeView.swift in Sources */,
@@ -611,10 +611,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -753,10 +750,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
