@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ColorSelectionView: View {
-    
     enum ColorTheme {
         case chart
         
@@ -26,32 +25,42 @@ struct ColorSelectionView: View {
     @Binding var selectedColor: Color
     
     let presets: [IdentifiableColor]
-    let bannedColor: Set<IdentifiableColor>
     
     init(selectedColor: Binding<Color>, theme: ColorTheme, bannedColor: Set<IdentifiableColor> = []) {
         self._selectedColor = selectedColor
         self.presets = theme.presets.filter { !bannedColor.contains($0) }
-        self.bannedColor = bannedColor
     }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 20) {
+            HStack(spacing: 10) {
                 ForEach(presets) { color in
-                    Circle()
-                        .fill(color.color)
-                        .frame(width: 20, height: 20)
-                        .overlay(
-                            Circle()
-                                .stroke(Color.white, lineWidth: selectedColor == color.color ? 3 : 0)
-                        )
-                        .onTapGesture {
-                            selectedColor = color.color
-                        }
+                    colorCircle(for: color)
                 }
             }
             .padding()
         }
+    }
+    
+    @ViewBuilder
+    private func colorCircle(for color: IdentifiableColor) -> some View {
+        let isSelected = selectedColor == color.value
+        
+        Circle()
+            .fill(color.value)
+            .frame(width: 20, height: 20)
+            .overlay {
+                if isSelected {
+                    Circle()
+                        .stroke(Color.white, lineWidth: 3)
+                        .shadow(color: .black.opacity(0.2), radius: 2, x: 0, y: 1)
+                }
+            }
+            .onTapGesture {
+                selectedColor = color.value
+            }
+            .padding(4)
+            .contentShape(Circle())
     }
 }
 

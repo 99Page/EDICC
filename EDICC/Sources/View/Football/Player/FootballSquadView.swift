@@ -7,27 +7,27 @@
 
 import SwiftUI
 
-@MainActor
+@Observable
 class FootballSquadViewModel {
+    
     var model: FootballSquadModel
+    var onPlayerTapped: (_ player: FootballPlayer) -> Void
     
     private let footballService: FootballService
-    
-    var onPlayerSelected: (FootballPlayer) -> Void
     
     init(
         model: FootballSquadModel,
         footballService: FootballService = .live,
-        onPlayerSelected: @escaping (FootballPlayer) -> Void
+        playerTapped: @escaping (FootballPlayer) -> Void
     ) {
         self.model = model
         self.footballService = footballService
-        self.onPlayerSelected = onPlayerSelected
+        self.onPlayerTapped = playerTapped
     }
     
     func onAppear() {
         guard model.players.isEmpty else { return }
-
+        
         Task {
             do {
                 let response = try await footballService.fetchStatistics(model.targetSeason, model.team.id)
@@ -38,8 +38,8 @@ class FootballSquadViewModel {
         }
     }
     
-    func playerSelected(_ player: FootballPlayer) {
-        onPlayerSelected(player)
+    func tapPlayer(_ player: FootballPlayer) {
+        onPlayerTapped(player)
     }
 }
 
@@ -47,7 +47,6 @@ class FootballSquadViewModel {
 class FootballSquadModel {
     let targetSeason: Int
     var team: EPLTeam
-    var positionFilter: FootballPosition = .all
     var players: [FootballPlayer] = []
     
     init(targetSeason: Int, team: EPLTeam) {
@@ -62,52 +61,17 @@ struct FootballSquadView: View {
     let vm: FootballSquadViewModel
     
     var body: some View {
-        VStack(spacing: 20) {
-            headerView
-                .padding(.top, 10)
-            
-            playerList
-        }
-        .onAppear {
-            vm.onAppear()
-        }
-    }
-    
-    var playerList: some View {
         LazyVStack(spacing: 12) {
             ForEach(vm.model.players) { player in
                 Button {
-                    vm.playerSelected(player)
+                    vm.onPlayerTapped(player)
                 } label: {
                     PlayerRowCard(player: player)
-                        .transition(.opacity.combined(with: .move(edge: .bottom)))
                 }
             }
         }
-    }
-    
-    var headerView: some View {
-        HStack {
-            Text("Squad List")
-                .font(.system(size: 22, weight: .semibold, design: .rounded))
-                .foregroundColor(.primary)
-                .layoutPriority(1)
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(FootballPosition.allCases, id: \.self) { position in
-                        PositionFilterButton(
-                            position: position.rawValue,
-                            isSelected: vm.model.positionFilter == position,
-                            color: vm.model.team.color
-                        ) {
-                            withAnimation(.spring()) {
-                                vm.model.positionFilter = position
-                            }
-                        }
-                    }
-                }
-            }
+        .onAppear {
+            vm.onAppear()
         }
     }
 }
@@ -179,40 +143,12 @@ struct PlayerRowCard: View {
     }
 }
 
-struct FootballPlayer: Identifiable {
-    let id = UUID()
-    let name: String
-    let country: Country
-    let position: FootballPosition?
-    let imageURL: String?
-    
-    init(name: String, country: Country, position: FootballPosition, imageURL: String?) {
-        self.name = name
-        self.country = country
-        self.position = position
-        self.imageURL = imageURL
-    }
-    
-    init(dto: FootballStatisticsResponse.Response) {
-        self.name = dto.player.name
-        self.country = .init(from: dto.player.nationality)
-        
-        let eplID = FootballLeague.epl.id
-        let eplStats = dto.statistics.first { $0.league.id == eplID }
-        
-        if let eplGames = eplStats?.games {
-            self.position = .init(from: eplGames)
-        } else {
-            self.position = nil
-        }
-        
-        self.imageURL = dto.player.photo
-    }
-}
-
 #Preview {
-    var model = FootballSquadModel(targetSeason: 2021, team: .liverpool)
-    let viewModel = FootballSquadViewModel(model: model, footballService: .preview) { _ in }
+    let model = FootballSquadModel(targetSeason: 2021, team: .liverpool)
+    let viewModel = FootballSquadViewModel(
+        model: model,
+        footballService: .preview
+    ) { _ in }
     
     FootballSquadView(vm: viewModel)
 }

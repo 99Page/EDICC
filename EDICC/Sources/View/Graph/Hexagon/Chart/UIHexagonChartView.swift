@@ -13,19 +13,20 @@ class UIHexagonChartView: UIView {
     
     let model: HexagonChartModel
     
-    // MARK: - UI Components
     var hexagonViews = [HexagonView]()
-    private var polygonLayers = [CAShapeLayer]()
     
-    // MARK: - Properties
+    private var primaryPolygonLayer = CAShapeLayer()
+    private var secondaryPolygonLayer = CAShapeLayer()
+    
+    private var lastPrimaryId: UUID?
+    private var lastSecondaryId: UUID?
+    
     private let hexagonIterations = 3
     private let chartInset = CGFloat(40)
     
-    // 애니메이션 중복 실행 방지 플래그
     var axisLabelViews: [UILabel] = []
     private var isInitialAnimationPlayed = false
     
-    // MARK: - Initialization
     init(data: HexagonChartModel) {
         self.model = data
         super.init(frame: .zero)
@@ -38,9 +39,21 @@ class UIHexagonChartView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var polygonLayers: [CAShapeLayer] {
+        [primaryPolygonLayer, secondaryPolygonLayer]
+    }
+    
     var outerHexagon: HexagonView? { hexagonViews.last }
     
     // MARK: - Setup Methods
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        updateDataPolygon()
+        updateLabels()
+    }
+    
     
     /// 배경 육각형 그리드 설정
     private func setupGrid() {
@@ -61,28 +74,19 @@ class UIHexagonChartView: UIView {
         }
     }
     
-    /// 데이터셋 개수에 맞춰 폴리곤 레이어 미리 생성
     private func setupDataLayers() {
         // 기존 레이어 제거 (재설정 시 안전장치)
         polygonLayers.forEach { $0.removeFromSuperlayer() }
-        polygonLayers.removeAll()
         
-        for _ in model.dataSets.enumerated() {
-            let radarPolygon = CAShapeLayer()
-            layer.addSublayer(radarPolygon)
-            polygonLayers.append(radarPolygon)
-        }
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
+        primaryPolygonLayer = CAShapeLayer()
+        secondaryPolygonLayer = CAShapeLayer()
         
-        updateDataPolygon()
-        updateLabels()
+        layer.addSublayer(secondaryPolygonLayer)
+        layer.addSublayer(primaryPolygonLayer)
     }
     
     private func updateDataPolygon() {
-        guard let outerHexagon, !model.dataSets.isEmpty else { return }
+        guard let outerHexagon, model.hasPoints else { return }
         
         outerHexagon.layoutIfNeeded()
         
@@ -93,58 +97,119 @@ class UIHexagonChartView: UIView {
             return outerHexagon.convert(point, to: self)
         }
         
+        let currentPrimaryId = model.primary.id
+        let currentSecondaryId = model.secondary.id
+        
+        
         if !isInitialAnimationPlayed {
             animateAllPolygons(center: outerHexagon.center, vertexes: convertedVertexes)
+            
             isInitialAnimationPlayed = true
+            lastPrimaryId = currentPrimaryId
+            lastSecondaryId = currentSecondaryId
+            
+        } else {
+            let isPrimaryChanged = currentPrimaryId != lastPrimaryId
+            let isSecondaryChanged = currentSecondaryId != lastSecondaryId
+            
+            if isPrimaryChanged || isSecondaryChanged {
+                updatePrimaryPolygon(center: outerHexagon.center, vertexes: convertedVertexes)
+                updateSecondaryPolygon(center: outerHexagon.center, vertexes: convertedVertexes)
+            } else {
+                // 화면 리사이징 대응 (디바이스 회전 등)
+                updatePathsWithoutAnimation(
+                    center: outerHexagon.center,
+                    vertexes: convertedVertexes
+                )
+            }
         }
         
         updatePolygonColor()
     }
     
+    private func updateSecondaryPolygon(center: CGPoint, vertexes: [CGPoint]) {
+        guard model.secondary.id != lastSecondaryId else { return }
+        
+        expandDataPolygon(
+            layer: secondaryPolygonLayer,
+            center: center,
+            vertexes: vertexes,
+            values: model.secondary.points.map { CGFloat($0.normalizedValue) },
+            beginTime: CACurrentMediaTime()
+        )
+        
+        lastSecondaryId = model.secondary.id
+    }
+    
+    private func updatePrimaryPolygon(center: CGPoint, vertexes: [CGPoint]) {
+        guard model.primary.id != lastPrimaryId else { return }
+        
+        expandDataPolygon(
+            layer: primaryPolygonLayer,
+            center: center,
+            vertexes: vertexes,
+            values: model.primary.points.map { CGFloat($0.normalizedValue) },
+            beginTime: CACurrentMediaTime()
+        )
+        
+        lastPrimaryId = model.primary.id
+    }
+    
+    private func updateLayerPath(layer: CAShapeLayer, center: CGPoint, vertexes: [CGPoint], values: [CGFloat]) {
+        let path = RadarPolygon(
+            center: center,
+            vertexes: vertexes,
+            factor: values
+        ).path().cgPath
+        layer.path = path
+    }
+    
     private func updatePolygonColor() {
-        for (index, polygonLayer) in polygonLayers.enumerated() {
-            guard index < model.dataSets.count else { break }
-            let color = UIColor(model.dataSets[index].color.color)
-            polygonLayer.fillColor = color.withAlphaComponent(0.4).cgColor
-        }
+        let primaryColor = UIColor(model.primary.color.value)
+        polygonLayers[0].fillColor = primaryColor.withAlphaComponent(0.4).cgColor
+        
+        let secondaryColor = UIColor(model.secondary.color.value)
+        polygonLayers[1].fillColor = secondaryColor.withAlphaComponent(0.4).cgColor
     }
     
     /// 모든 데이터 폴리곤을 순차적으로 애니메이션
     private func animateAllPolygons(center: CGPoint, vertexes: [CGPoint]) {
         let currentTime = CACurrentMediaTime()
         
-        for (index, dataSet) in model.dataSets.enumerated() {
-            // 안전장치: 레이어가 데이터보다 적을 경우 대비
-            guard index < polygonLayers.count else { break }
-            
-            let layer = polygonLayers[index]
-            
-            // 0.2초 간격으로 순차 실행 (DispatchQueue 대신 beginTime 사용)
-            let delay = Double(index) * 0.2
-            
-            expandDataPolygon(
-                layer: layer,
-                center: center,
-                vertexes: vertexes,
-                values: dataSet.points.map { $0.value },
-                beginTime: currentTime + delay
-            )
-        }
+        expandDataPolygon(
+            layer: primaryPolygonLayer,
+            center: center,
+            vertexes: vertexes,
+            values: model.primary.points.map { CGFloat($0.normalizedValue) },
+            beginTime: currentTime
+        )
+        
+        expandDataPolygon(
+            layer: secondaryPolygonLayer,
+            center: center,
+            vertexes: vertexes,
+            values: model.secondary.points.map { CGFloat($0.normalizedValue) },
+            beginTime: currentTime + 0.2
+        )
     }
     
     /// 화면 회전 등을 위해 애니메이션 없이 즉시 경로 업데이트
     private func updatePathsWithoutAnimation(center: CGPoint, vertexes: [CGPoint]) {
-        for (index, dataSet) in model.dataSets.enumerated() {
-            guard index < polygonLayers.count else { break }
-            
-            let finalPath = RadarPolygon(
-                center: center,
-                vertexes: vertexes,
-                factor: dataSet.points.map { $0.value }
-            ).path().cgPath
-            
-            polygonLayers[index].path = finalPath
-        }
+        let primaryPath = RadarPolygon(
+            center: center,
+            vertexes: vertexes,
+            factor: model.primary.points.map { CGFloat($0.normalizedValue)}
+        ).path().cgPath
+        
+        primaryPolygonLayer.path = primaryPath
+        
+        let secondaryPath = RadarPolygon(
+            center: center,
+            vertexes: vertexes,
+            factor: model.secondary.points.map { CGFloat($0.normalizedValue)}
+        ).path().cgPath
+        
+        secondaryPolygonLayer.path = secondaryPath
     }
     
     /// 개별 레이어 확장 애니메이션 로직

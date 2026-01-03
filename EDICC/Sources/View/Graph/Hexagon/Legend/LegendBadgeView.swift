@@ -7,47 +7,53 @@
 
 import SwiftUI
 
-struct ChartLegendView<LegendView: View>: View {
-    @Binding var primaryColor: IdentifiableColor
-    let primaryTitle: String
+struct ChartLegendView: View {
     
-    @Binding var secondaryColor: IdentifiableColor
-    let secondaryTitle: String
+    @Binding var primary: HexagonDataSet
+    @Binding var secondary: HexagonDataSet
     
-    @State private var isLegendSelectionViewPresented = false
-    @State private var isPrimaryColorSelected: Bool = true
-    
-    let legendView: () -> LegendView
-    
+    var onLegendSelected: (HexagonDataSet) -> Void
     
     var body: some View {
         HStack(spacing: 20) {
-            LegendBadgeView(color: $primaryColor.color, title: primaryTitle)
-                .onTapGesture {
-                    isPrimaryColorSelected = true
-                    isLegendSelectionViewPresented = true
-                }
+            legendBadgeView(
+                dataSet: primary,
+                color: $primary.color.value
+            )
             
-            Rectangle()
-                .fill(Color.gray.opacity(0.3))
-                .frame(width: 1, height: 12)
+            divider
             
-            LegendBadgeView(color: $secondaryColor.color, title: secondaryTitle)
-                .onTapGesture {
-                    isPrimaryColorSelected = false
-                    isLegendSelectionViewPresented = true
-                }
+            legendBadgeView(
+                dataSet: secondary,
+                color: $secondary.color.value
+            )
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 16)
         .background(Color.black.opacity(0.05))
-        .cornerRadius(12)
-        .sheet(isPresented: $isLegendSelectionViewPresented) {
-            LegendSelectionView(
-                color: isPrimaryColorSelected ? $primaryColor.color : $secondaryColor.color,
-                bannedColor: isPrimaryColorSelected ? [secondaryColor] : [primaryColor]
-            ) { legendView() }
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+// MARK: - Subviews & Helpers
+private extension ChartLegendView {
+    @ViewBuilder
+    func legendBadgeView(dataSet: HexagonDataSet, color: Binding<Color>) -> some View {
+        LegendBadgeView(
+            color: color,
+            title: dataSet.label
+        )
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onLegendSelected(dataSet)
         }
+    }
+    
+    /// 중앙 구분선
+    var divider: some View {
+        Rectangle()
+            .fill(Color.gray.opacity(0.3))
+            .frame(width: 1, height: 12)
     }
 }
 
@@ -68,22 +74,4 @@ struct LegendBadgeView: View {
                 .lineLimit(1)
         }
     }
-}
-
-#Preview {
-    
-    @Previewable @State var c1 = IdentifiableColor(.creamyOrange)
-    @Previewable @State var c2 = IdentifiableColor(.lavendar)
-    
-    ChartLegendView(
-        primaryColor: $c1,
-        primaryTitle: "c1",
-        secondaryColor: $c2,
-        secondaryTitle: "c2"
-    ) {
-        EmptyView()
-    }
-    .background(
-        Color.black
-    )
 }

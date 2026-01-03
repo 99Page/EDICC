@@ -1,42 +1,68 @@
 import SwiftUI
 
-struct HexagonCardView<LegendView: View>: View {
+@Observable
+class HexagonCardViewModel {
+    var model: HexagonCardModel
+    
+    var legendSelected: ((HexagonDataSet) -> Void)?
+    
+    init(model: HexagonCardModel) {
+        self.model = model
+    }
+    
+    func selectLegend(_ hexagon: HexagonDataSet) {
+        model.selectedDataSet = hexagon
+        legendSelected?(hexagon)
+    }
+}
+
+struct HexagonCardView<SheetItem: HexagonUpdatable, SheetContent: View>: View {
     
     
-    @Bindable var model: HexagonCardModel
+    @Binding var legendVM: SheetItem?
+    @Bindable var vm: HexagonCardViewModel
     
-    let legendView: () -> LegendView
+    @ViewBuilder let legendView: (SheetItem) -> SheetContent
     
     var body: some View {
-        GeometryReader { proxy in
-            let chartHeight = proxy.size.height / 2
-            let chartWidth = proxy.size.width
-            ScrollView {
-                VStack(spacing: 0) {
-                    HexagonChartView(data: model.chart)
-                        .frame(width: chartWidth, height: chartHeight, alignment: .top)
-                    
-                    ChartLegendView(
-                        primaryColor: $model.chart.dataSets[0].color,
-                        primaryTitle: model.chart.dataSets[0].label,
-                        secondaryColor: $model.chart.dataSets[1].color,
-                        secondaryTitle: model.chart.dataSets[1].label
-                    ) {
-                        legendView()
-                    }
-                    
-                    HexagonStatsTableView(model: model)
-                        .padding(.top, 16)
-                        .padding(.horizontal, 16)
-                }
+        ScrollView {
+            VStack(spacing: 0) {
+                HexagonChartView(data: vm.model.chart)
+                    .aspectRatio(1.2, contentMode: .fit)
+                
+                ChartLegendView(
+                    primary: $vm.model.chart.primary,
+                    secondary: $vm.model.chart.secondary,
+                    onLegendSelected: vm.selectLegend,
+                )
+                
+                HexagonStatsTableView(model: vm.model)
+                    .padding(.top, 16)
+                    .padding(.horizontal, 16)
             }
         }
+        .sheet(item: $legendVM) { item in
+            legendSheet(sheetVM: item)
+        }
+    }
+    
+    /// 시트 내부 컨텐츠 생성 로직
+    @ViewBuilder
+    func legendSheet(sheetVM: SheetItem) -> some View {
+        // 복잡한 삼항 연산자를 변수로 분리
+        let targetColor = vm.model.isPrimarySelected ? $vm.model.chart.primary.color.value : $vm.model.chart.secondary.color.value
+        
+        LegendSelectionView(
+            color: targetColor,
+            bannedColor: vm.model.bannedColors
+        ) {
+            legendView(sheetVM)
+        }
+        .presentationDragIndicator(.visible)
     }
 }
 
 
 #Preview {
-    let model = FootballHexagonCardModel()
-    
-    HexagonCardView(model: model.hexagonCard) { EmptyView() }
+    FootballHexagonCardView()
 }

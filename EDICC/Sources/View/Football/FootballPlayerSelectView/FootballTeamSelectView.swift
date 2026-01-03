@@ -7,15 +7,26 @@
 
 import SwiftUI
 
-@MainActor
-class FootballTeamSelectViewModel {
+@Observable
+class FootballTeamSelectViewModel: Identifiable, HexagonUpdatable {
+    
+    let id = UUID()
     var model = FootballTeamSelectModel()
     var squadVM: FootballSquadViewModel?
     
-    private var footballService: FootballService
+    var hexagonTarget: HexagonDataSet
     
-    init(footballService: FootballService = .live) {
+    private var footballService: FootballService
+    var onLegendChanged: (HexagonDataSet, HexagonDataSet) -> Void
+    
+    init(
+        hexagonTarget: HexagonDataSet,
+        footballService: FootballService = .live,
+        legendChanged: @escaping (HexagonDataSet, HexagonDataSet) -> Void
+    ) {
+        self.hexagonTarget = hexagonTarget
         self.footballService = footballService
+        self.onLegendChanged = legendChanged
     }
     
     func downArrowTapped() {
@@ -32,13 +43,7 @@ class FootballTeamSelectViewModel {
             let needsSeasonUpdate = model.selectedTeam != team
             
             model.selectedTeam = team
-            
-            Task {
-                if needsSeasonUpdate {
-                    let response = try await footballService.fetchAvailableSeason(team.id)
-                    model.availableSeasons = response.response
-                }
-            }
+            model.availableSeasons = [2023, 2022, 2021]
         }
     }
     
@@ -50,14 +55,20 @@ class FootballTeamSelectViewModel {
         
         squadVM = FootballSquadViewModel(
             model: model,
-            footballService: footballService,
-            onPlayerSelected: { [weak self] player in
-                self?.handlePlayerSelected(player)
-            })
+            footballService: footballService
+        ) { [weak self] in
+            self?.onPlayerSelected($0)
+        }
     }
     
-    private func handlePlayerSelected(_ player: FootballPlayer) {
+    private  func onPlayerSelected(_ player: FootballPlayer) {
+        let newHexagon = HexagonDataSet(
+            label: player.label,
+            color: hexagonTarget.color,
+            points: player.hexagonPoints(standard: FootballPlayer.self)
+        )
         
+        updateHexagon(new: newHexagon)
     }
 }
 
@@ -68,7 +79,7 @@ class FootballTeamSelectModel {
     
     var availableSeasons: [Int] = []
     
-    var isSeansomTeamSelected: Bool {
+    var isSeansonTeamSelected: Bool {
         selectedTeam != nil && selectedSeason != nil
     }
     
@@ -78,7 +89,7 @@ class FootballTeamSelectModel {
 struct FootballTeamSelectView: View {
     
     @Namespace private var animation
-    @State private var vm: FootballTeamSelectViewModel
+    let vm: FootballTeamSelectViewModel
     
     let teamColumns = [
         GridItem(.flexible(), spacing: 16),
@@ -93,9 +104,10 @@ struct FootballTeamSelectView: View {
     
     var body: some View {
         ZStack(alignment: .bottom) {
-            if !vm.model.isSeansomTeamSelected {
+            if !vm.model.isSeansonTeamSelected {
                 selectView
                     .matchedGeometryEffect(id: "morph", in: animation)
+                    .zIndex(1)
             }
             
             if let selectedTeam = vm.model.selectedTeam,
@@ -118,9 +130,10 @@ struct FootballTeamSelectView: View {
                     FootballSquadView(vm: squadVM)
                 }
                 .matchedGeometryEffect(id: "morph", in: animation)
+                .zIndex(2)
             }
         }
-        .padding(.top, vm.model.isSeansomTeamSelected ? 0 : 20)
+        .padding(.top, vm.model.isSeansonTeamSelected ? 0 : 20)
     }
     
     var selectView: some View {
@@ -246,7 +259,10 @@ struct TeamData: Identifiable {
 #Preview {
     ScrollView {
         FootballTeamSelectView(
-            vm: FootballTeamSelectViewModel(footballService: .preview)
+            vm: FootballTeamSelectViewModel(
+                hexagonTarget: .mockAverage(),
+                footballService: .preview
+            ) { _, _ in }
         )
         .padding(.horizontal)
     }

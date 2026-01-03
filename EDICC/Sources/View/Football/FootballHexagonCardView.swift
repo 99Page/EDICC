@@ -8,17 +8,30 @@
 import SwiftUI
 
 @Observable
-class FootballHexagonCardModel {
-    var hexagonCard = HexagonCardModel()
+class FootballHexagonCardViewModel {
+    var hexagonVM = HexagonCardViewModel(model: HexagonCardModel())
+    var teamSelectVM: FootballTeamSelectViewModel?
+    
+    init() {
+        hexagonVM.legendSelected = { [weak self] hexagon in
+            self?.setupSelectionVM(hexagon)
+        }
+    }
+    
+    func setupSelectionVM(_ hexagonDataSet: HexagonDataSet) {
+        teamSelectVM = FootballTeamSelectViewModel(hexagonTarget: hexagonDataSet) { [weak self] in
+            self?.hexagonVM.model.chart.updateDataSet(old: $0, new: $1)
+        }
+    }
 }
 
 struct FootballHexagonCardView: View {
     
-    @State private var model = FootballHexagonCardModel()
+    @State private var vm = FootballHexagonCardViewModel()
     
     var body: some View {
-        HexagonCardView(model: model.hexagonCard) {
-            FootballTeamSelectView(vm: FootballTeamSelectViewModel())
+        HexagonCardView(legendVM: $vm.teamSelectVM, vm: vm.hexagonVM) { vm in
+            FootballTeamSelectView(vm: vm)
         }
     }
 }
