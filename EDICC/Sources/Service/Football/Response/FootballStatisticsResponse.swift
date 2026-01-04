@@ -9,7 +9,7 @@ import Foundation
 
 struct FootballStatisticsResponse: Decodable {
     let get: String
-    let errors: [[String: String]]?
+    let errors: RapidAPIError
     let results: Int
     let paging: RapidPagingDTO
     let response: [Response]
@@ -17,7 +17,7 @@ struct FootballStatisticsResponse: Decodable {
     static func manchesterUnited() -> FootballStatisticsResponse {
         FootballStatisticsResponse(
             get: "players/squads",
-            errors: nil,
+            errors: .empty,
             results: 1,
             paging: .stub(),
             response: [.jaidonSancho, .brunoFernandes]

@@ -40,10 +40,7 @@ class FootballTeamSelectViewModel: Identifiable, HexagonUpdatable {
             model.selectedTeam = nil
             model.availableSeasons.removeAll()
         } else {
-            let needsSeasonUpdate = model.selectedTeam != team
-            
             model.selectedTeam = team
-            model.availableSeasons = [2023, 2022, 2021]
         }
     }
     
@@ -77,7 +74,7 @@ class FootballTeamSelectModel {
     var selectedTeam: EPLTeam? = nil
     var selectedSeason: Int? = nil
     
-    var availableSeasons: [Int] = []
+    var availableSeasons: [Int] = [2023, 2022, 2021]
     
     var isSeansonTeamSelected: Bool {
         selectedTeam != nil && selectedSeason != nil

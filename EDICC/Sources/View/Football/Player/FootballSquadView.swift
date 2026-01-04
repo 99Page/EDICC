@@ -9,7 +9,6 @@ import SwiftUI
 
 @Observable
 class FootballSquadViewModel {
-    
     var model: FootballSquadModel
     var onPlayerTapped: (_ player: FootballPlayer) -> Void
     
@@ -108,9 +107,8 @@ struct PlayerRowCard: View {
             AsyncImage(url: URL(string: player.imageURL ?? "")) { image in
                 image
                     .resizable()
-                    .scaledToFit()// 이미지가 꽉 차게
+                    .scaledToFit()
             } placeholder: {
-                // 이미지가 없을 때나 로딩 중일 때 중앙에 아이콘 표시
                 Image(systemName: "person.fill")
                     .font(.system(size: 20))
                     .foregroundColor(.gray.opacity(0.5))
@@ -150,5 +148,7 @@ struct PlayerRowCard: View {
         footballService: .preview
     ) { _ in }
     
-    FootballSquadView(vm: viewModel)
+    ScrollView {
+        FootballSquadView(vm: viewModel)
+    }
 }

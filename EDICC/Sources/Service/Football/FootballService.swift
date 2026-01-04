@@ -52,7 +52,6 @@ extension FootballService {
         }
     )
     
-    // Preview Mock Data
     static let preview = FootballService { _ in
         AvailableSeasonResponse(
             get: "teams/seasons",
