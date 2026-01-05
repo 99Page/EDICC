@@ -19,26 +19,23 @@ import Foundation
 ///   }
 ///  ```
 ///
-enum RapidAPIError: Decodable {
-    case empty              // [] 인 경우 (성공)
-    case list([String: String]) // {...} 인 경우 (실패)
+enum RapidAPIError: Decodable, Error {
+    case empty
+    case list([String: String])
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
-        // 1. 딕셔너리(에러 메시지)로 시도
+        // Dictionary로 디코딩 된다면 에러 발생하는 상황
         if let dict = try? container.decode([String: String].self) {
-            self = .list(dict)
-            return
+            throw RapidAPIError.list(dict)
         }
         
-        // 2. 배열(빈 배열)로 시도
         if let array = try? container.decode([String].self), array.isEmpty {
             self = .empty
             return
         }
         
-        // 3. 둘 다 아니면 에러 처리 (혹은 .empty로 퉁치기)
         throw DecodingError.typeMismatch(
             RapidAPIError.self,
             DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Expected dictionary or empty array")

@@ -71,7 +71,7 @@ struct LegendBadgeView: View {
             Text(title)
                 .font(.system(size: 13, weight: .semibold))
                 .foregroundColor(.black.opacity(0.8))
-                .lineLimit(1)
+                .lineLimit(2)
         }
     }
 }

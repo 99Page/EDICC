@@ -9,7 +9,13 @@ import Foundation
 
 struct FootballService {
     var fetchAvailableSeason: (_ teamID: Int) async throws -> AvailableSeasonResponse
-    var fetchStatistics: (_ season: Int, _ teamID: Int) async throws -> FootballStatisticsResponse
+    var fetchStatistics: (_ param: StatisticsParameters) async throws -> FootballStatisticsResponse
+    
+    struct StatisticsParameters {
+        let season: Int
+        let teamID: Int
+        let page: Int
+    }
 }
 
 extension FootballService {
@@ -34,15 +40,15 @@ extension FootballService {
             
             return result
             
-        }, fetchStatistics: { season, teamID in
+        }, fetchStatistics: { param in
             let url = "https://v3.football.api-sports.io/players"
             
             let response = try await GPD.build(url)
                 .method(.get)
                 .parameters([
-                    "team": teamID,
-                    "season": season,
-                    "page": 1 // 명시적으로 1페이지 요청
+                    "team": param.teamID,
+                    "season": param.season,
+                    "page": param.page
                 ])
                 .headers(APIConstants.rapidAPIHeader)
                 .decoding(FootballStatisticsResponse.self)
@@ -61,7 +67,13 @@ extension FootballService {
             paging: .init(current: 1, total: 1),
             response: [2022, 2023, 2024]
         )
-    } fetchStatistics: { _, _ in
-            .manchesterUnited()
+    } fetchStatistics: { _ in
+            .manchesterUnitedRand()
+    }
+    
+    static let failure = FootballService { _ in
+        throw RapidAPIError.list([:])
+    } fetchStatistics: { _ in
+        throw RapidAPIError.list([:])
     }
 }

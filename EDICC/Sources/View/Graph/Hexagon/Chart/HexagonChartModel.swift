@@ -29,6 +29,16 @@ class HexagonChartModel {
         self.secondary = secondary
     }
     
+    func update(target: KeyPath<HexagonChartModel, HexagonDataSet>, label: String, points: [HexagonDataPoint]) {
+        let new = HexagonDataSet(
+            label: label,
+            color: self[keyPath: target].color,
+            points: points
+        )
+        
+        updateDataSet(old: self[keyPath: target], new: new)
+    }
+    
     func updateDataSet(old: HexagonDataSet, new: HexagonDataSet) {
         if primary.id == old.id {
             primary = new
