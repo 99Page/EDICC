@@ -73,7 +73,7 @@ struct HexagonStatsTableView: View {
 }
 
 #Preview {
-    @Previewable @State var model = HexagonCardModel()
+    @Previewable @State var model = HexagonCardModel(chart: HexagonChartModel())
     
     HexagonStatsTableView(
         model: model

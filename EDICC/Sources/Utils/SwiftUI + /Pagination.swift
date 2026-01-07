@@ -33,8 +33,6 @@ struct PaginationTrigger: ViewModifier {
                 isLoading = false
                 
                 try? await Task.sleep(for: .seconds(delay))
-                
-                isCoolingDown = false
             }
     }
 }

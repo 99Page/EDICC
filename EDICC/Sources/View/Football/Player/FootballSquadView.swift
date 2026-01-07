@@ -43,11 +43,14 @@ class FootballSquadViewModel {
             
             model.fetchPage += 1
             model.hasMoreToFetch = response.paging.current < response.paging.total
-            model.append(players)
-            model.updateLastPlayer()
+            
+            Task { @MainActor in
+                model.append(players)
+                model.updateLastPlayer()
+            }
         } catch let error as RapidAPIError {
             // 요금제로 인한 접근 불가 시 별도 처리 x
-            guard case let .list(dictionary) = error, dictionary["plan"] != nil else { return }
+            guard case let .serverMessage(dictionary) = error, dictionary["plan"] == nil else { return }
             model.showFetchFailAlert()
         } catch {
             model.showFetchFailAlert()

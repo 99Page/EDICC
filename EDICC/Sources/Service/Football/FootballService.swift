@@ -72,8 +72,8 @@ extension FootballService {
     }
     
     static let failure = FootballService { _ in
-        throw RapidAPIError.list([:])
+        throw RapidAPIError.serverMessage([:])
     } fetchStatistics: { _ in
-        throw RapidAPIError.list([:])
+        throw RapidAPIError.serverMessage([:])
     }
 }

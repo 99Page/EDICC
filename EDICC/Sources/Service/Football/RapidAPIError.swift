@@ -21,14 +21,14 @@ import Foundation
 ///
 enum RapidAPIError: Decodable, Error {
     case empty
-    case list([String: String])
+    case serverMessage([String: String])
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
         // Dictionary로 디코딩 된다면 에러 발생하는 상황
         if let dict = try? container.decode([String: String].self) {
-            throw RapidAPIError.list(dict)
+            throw RapidAPIError.serverMessage(dict)
         }
         
         if let array = try? container.decode([String].self), array.isEmpty {

@@ -9,8 +9,8 @@ import Foundation
 
 @Observable
 class HexagonChartModel {
-    var primary: HexagonDataSet
-    var secondary: HexagonDataSet
+    var primary = HexagonDataSet(label: "", color: IdentifiableColor(.creamyOrange), points: [])
+    var secondary = HexagonDataSet(label: "", color: IdentifiableColor(.hexagonBackground), points: [])
     
     var dataSets: [HexagonDataSet] {
         [primary, secondary]
@@ -24,19 +24,28 @@ class HexagonChartModel {
         return primary.points.map { $0.label }
     }
     
+    init() { }
+    
     init(primary: HexagonDataSet, secondary: HexagonDataSet) {
         self.primary = primary
         self.secondary = secondary
     }
     
-    func update(target: KeyPath<HexagonChartModel, HexagonDataSet>, label: String, points: [HexagonDataPoint]) {
-        let new = HexagonDataSet(
+    func update(
+        target: ReferenceWritableKeyPath<HexagonChartModel, HexagonDataSet>,
+        label: String,
+        points: [HexagonDataPoint]
+    ) {
+        // 기존 색상은 유지하고 데이터만 교체
+        let currentColor = self[keyPath: target].color
+        
+        let newDataSet = HexagonDataSet(
             label: label,
-            color: self[keyPath: target].color,
+            color: currentColor,
             points: points
         )
         
-        updateDataSet(old: self[keyPath: target], new: new)
+        self[keyPath: target] = newDataSet
     }
     
     func updateDataSet(old: HexagonDataSet, new: HexagonDataSet) {
