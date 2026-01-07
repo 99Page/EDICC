@@ -9,18 +9,28 @@ import Foundation
 
 struct FootballStatisticsResponse: Decodable {
     let get: String
-    let errors: [[String: String]]?
+    let errors: RapidAPIError
     let results: Int
     let paging: RapidPagingDTO
     let response: [Response]
     
-    static func manchesterUnited() -> FootballStatisticsResponse {
+    static func manchesterUnitedRand() -> FootballStatisticsResponse {
         FootballStatisticsResponse(
             get: "players/squads",
-            errors: nil,
+            errors: .empty,
             results: 1,
             paging: .stub(),
-            response: [.jaidonSancho, .brunoFernandes]
+            response: [.jaidonSanchoRand, .brunoFernandes23]
+        )
+    }
+    
+    static var manchersterUnited23: FootballStatisticsResponse {
+        FootballStatisticsResponse(
+            get: "players/squads",
+            errors: .empty,
+            results: 1,
+            paging: .stub(),
+            response: [.brunoFernandes23, .diogoDalot23]
         )
     }
     
@@ -28,12 +38,16 @@ struct FootballStatisticsResponse: Decodable {
         let player: FootballPlayerDTO
         let statistics: [Statistic]
         
-        static var jaidonSancho: Response {
-            Response(player: .jaidonSancho, statistics: [.manchesterUnited()])
+        static var diogoDalot23: Response {
+            Response(player: .diogoDalot, statistics: [.diogoDalot23])
         }
         
-        static var brunoFernandes: Response {
-            Response(player: .brunoFernandes(), statistics: [.manchesterUnited()])
+        static var brunoFernandes23: Response {
+            Response(player: .brunoFernandes, statistics: [.brunoFernandes23])
+        }
+        
+        static var jaidonSanchoRand: Response {
+            Response(player: .jaidonSancho, statistics: [.manchesterUnited()])
         }
     }
     
@@ -49,6 +63,38 @@ struct FootballStatisticsResponse: Decodable {
         let fouls: Fouls
         let cards: Cards
         let tackles: Tackles
+        
+        static var diogoDalot23: Statistic {
+            Statistic(
+                team: .manchesterUnited(),
+                league: .premierLeague(),
+                games: .diogoDalot23,
+                shots: .diogoDalot23,
+                goals: .diogoDalot23,
+                passes: .diogoDalot23,
+                duels: .diogoDalot23,
+                dribbles: .diogoDalot23,
+                fouls: .diogoDalot23,
+                cards: .diogoDalot23,
+                tackles: .diogoDalot23
+            )
+        }
+        
+        static var brunoFernandes23: Statistic {
+            Statistic(
+                team: .manchesterUnited(),
+                league: .premierLeague(),
+                games: .brunoFernandes23,
+                shots: .brunoFernandes23,
+                goals: .brunoFernandes23,
+                passes: .brunoFernandes23,
+                duels: .brunoFernandes23,
+                dribbles: .brunoFernandes23,
+                fouls: .brunoFernandes23,
+                cards: .brunoFernandes23,
+                tackles: .brunoFernandes23
+            )
+        }
         
         static func manchesterUnited() -> Statistic {
             Statistic(
@@ -71,6 +117,14 @@ struct FootballStatisticsResponse: Decodable {
     struct Tackles: Decodable {
         let total, blocks, interceptions: Int?
         
+        static var brunoFernandes23: Tackles {
+            Tackles(total: 68, blocks: 6, interceptions: 27)
+        }
+        
+        static var diogoDalot23: Tackles {
+            Tackles(total: 81, blocks: 16, interceptions: 37)
+        }
+        
         static var stub: Tackles {
             let isDefensive = Bool.random()
             return Tackles(
@@ -85,6 +139,14 @@ struct FootballStatisticsResponse: Decodable {
     struct Cards: Codable {
         let yellow, yellowred, red: Int?
         
+        static var brunoFernandes23: Cards {
+            Cards(yellow: 9, yellowred: nil, red: 0)
+        }
+        
+        static var diogoDalot23: Cards {
+            Cards(yellow: 5, yellowred: 1, red: 0)
+        }
+        
         static var stub: Cards {
             Cards(
                 yellow: Int.random(in: 0...10),
@@ -97,6 +159,14 @@ struct FootballStatisticsResponse: Decodable {
     // MARK: - Dribbles
     struct Dribbles: Codable {
         let attempts, success: Int?
+        
+        static var brunoFernandes23: Dribbles {
+            Dribbles(attempts: 40, success: 49)
+        }
+        
+        static var diogoDalot23: Dribbles {
+            Dribbles(attempts: 49, success: 31)
+        }
         
         static var stub: Dribbles {
             let attempt = Int.random(in: 10...60)
@@ -111,6 +181,14 @@ struct FootballStatisticsResponse: Decodable {
     struct Duels: Codable {
         let total, won: Int?
         
+        static var brunoFernandes23: Duels {
+            Duels(total: 316, won: 136)
+        }
+        
+        static var diogoDalot23: Duels {
+            Duels(total: 278, won: 158)
+        }
+        
         static var stub: Duels {
             let total = Int.random(in: 50...400)
             return Duels(
@@ -123,6 +201,14 @@ struct FootballStatisticsResponse: Decodable {
     // MARK: - Fouls
     struct Fouls: Codable {
         let drawn, committed: Int?
+        
+        static var brunoFernandes23: Fouls {
+            Fouls(drawn: 28, committed: 41)
+        }
+        
+        static var diogoDalot23: Fouls {
+            Fouls(drawn: 14, committed: 45)
+        }
         
         static var stub: Fouls {
             Fouls(
@@ -144,8 +230,30 @@ struct FootballStatisticsResponse: Decodable {
             return Double(rating ?? "0") ?? 0.0
         }
         
+        static var brunoFernandes23: Games {
+            Games(
+                appearences: 35,
+                lineups: 31,
+                minutes: 3119,
+                position: "Midfielder",
+                rating: "7.780000",
+                captain: false
+            )
+        }
+        
+        static var diogoDalot23: Games {
+            Games(
+                appearences: 36,
+                lineups: 35,
+                minutes: 3174,
+                position: "Defender",
+                rating: "7.108333",
+                captain: false
+            )
+        }
+        
         static var stub: Games {
-            let appearances = Int.random(in: 1...38)
+            let appearances = Int.random(in: 15...38)
             let lineups = Int.random(in: 15...appearances)
             
             let subAppearances = appearances - lineups
@@ -172,6 +280,14 @@ struct FootballStatisticsResponse: Decodable {
     struct Goals: Codable {
         let total, conceded, assists: Int?
         
+        static var brunoFernandes23: Goals {
+            Goals(total: 10, conceded: 0, assists: 8)
+        }
+        
+        static var diogoDalot23: Goals {
+            Goals(total: 2, conceded: 0, assists: 3)
+        }
+        
         static var stub: Goals {
             let isGoalkeeper = Int.random(in: 1...10) <= 2
             
@@ -187,6 +303,14 @@ struct FootballStatisticsResponse: Decodable {
     struct Passes: Codable {
         let total, key: Int?
         
+        static var brunoFernandes23: Passes {
+            Passes(total: 1912, key: 116)
+        }
+        
+        static var diogoDalot23: Passes {
+            Passes(total: 1493, key: 38)
+        }
+        
         static var stub: Passes {
             let total = Int.random(in: 500...2500)
             return Passes(
@@ -199,6 +323,14 @@ struct FootballStatisticsResponse: Decodable {
     // MARK: - Shots
     struct Shots: Decodable {
         let total, on: Int?
+        
+        static var brunoFernandes23: Shots {
+            Shots(total: 68, on: 41)
+        }
+        
+        static var diogoDalot23: Shots {
+            Shots(total: 20, on: 7)
+        }
         
         static var stub: Shots {
             let total = Int.random(in: 10...100)
@@ -258,6 +390,22 @@ struct FootballPlayerDTO: Decodable {
         let country: String
     }
     
+    static var diogoDalot: FootballPlayerDTO {
+        FootballPlayerDTO(
+            id: 886,
+            name: "Diogo Dalot",
+            firstname: "José Diogo",
+            lastname: "Dalot Teixeira",
+            age: 26,
+            birth: BirthDTO(date: "1999-03-18", place: "Brage", country: "Portugal"),
+            nationality: "Portugal",
+            height: "183",
+            weight: "78",
+            injured: false,
+            photo: "https://media.api-sports.io/football/players/886.png"
+        )
+    }
+    
     static var jaidonSancho: FootballPlayerDTO {
         FootballPlayerDTO(
             id: 18,
@@ -274,7 +422,7 @@ struct FootballPlayerDTO: Decodable {
         )
     }
     
-    static func brunoFernandes() -> FootballPlayerDTO {
+    static var brunoFernandes: FootballPlayerDTO {
         FootballPlayerDTO(
             id: 1485,
             name: "Bruno Fernandes",

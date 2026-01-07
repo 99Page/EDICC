@@ -29,21 +29,16 @@ class FootballTeamSelectViewModel: Identifiable, HexagonUpdatable {
         self.onLegendChanged = legendChanged
     }
     
-    func downArrowTapped() {
+    func tapResetButton() {
         model.selectedTeam = nil
         model.selectedSeason = nil
-        model.availableSeasons.removeAll()
     }
     
     func teamCardTapped(_ team: EPLTeam) {
         if model.selectedTeam == team {
             model.selectedTeam = nil
-            model.availableSeasons.removeAll()
         } else {
-            let needsSeasonUpdate = model.selectedTeam != team
-            
             model.selectedTeam = team
-            model.availableSeasons = [2023, 2022, 2021]
         }
     }
     
@@ -55,13 +50,13 @@ class FootballTeamSelectViewModel: Identifiable, HexagonUpdatable {
         
         squadVM = FootballSquadViewModel(
             model: model,
-            footballService: footballService
+            footballService: .live
         ) { [weak self] in
             self?.onPlayerSelected($0)
         }
     }
     
-    private  func onPlayerSelected(_ player: FootballPlayer) {
+    private func onPlayerSelected(_ player: FootballPlayer) {
         let newHexagon = HexagonDataSet(
             label: player.label,
             color: hexagonTarget.color,
@@ -77,7 +72,7 @@ class FootballTeamSelectModel {
     var selectedTeam: EPLTeam? = nil
     var selectedSeason: Int? = nil
     
-    var availableSeasons: [Int] = []
+    var availableSeasons: [Int] = [2023, 2022, 2021]
     
     var isSeansonTeamSelected: Bool {
         selectedTeam != nil && selectedSeason != nil
@@ -106,8 +101,6 @@ struct FootballTeamSelectView: View {
         ZStack(alignment: .bottom) {
             if !vm.model.isSeansonTeamSelected {
                 selectView
-                    .matchedGeometryEffect(id: "morph", in: animation)
-                    .zIndex(1)
             }
             
             if let selectedTeam = vm.model.selectedTeam,
@@ -119,9 +112,7 @@ struct FootballTeamSelectView: View {
                             team: selectedTeam,
                             season: selectedSeason
                         ) {
-                            withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-                                vm.downArrowTapped()
-                            }
+                            vm.tapResetButton()
                         }
                         
                         Spacer()
@@ -129,8 +120,6 @@ struct FootballTeamSelectView: View {
                     
                     FootballSquadView(vm: squadVM)
                 }
-                .matchedGeometryEffect(id: "morph", in: animation)
-                .zIndex(2)
             }
         }
         .padding(.top, vm.model.isSeansonTeamSelected ? 0 : 20)

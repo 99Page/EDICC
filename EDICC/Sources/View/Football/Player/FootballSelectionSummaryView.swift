@@ -15,7 +15,6 @@ struct FootballSelectionSummaryView: View {
     var body: some View {
         HStack(spacing: 12) {
             
-            // 1. 왼쪽: 팀 로고 영역
             ZStack {
                 Circle()
                     .fill(Color.white)
@@ -29,7 +28,6 @@ struct FootballSelectionSummaryView: View {
                     .foregroundColor(team.color)
             }
             
-            // 2. 중앙: 텍스트 영역 (팀 이름 & 시즌)
             VStack(alignment: .leading, spacing: 2) {
                 Text(team.name)
                     .font(.system(size: 16, weight: .bold, design: .rounded))
@@ -40,14 +38,13 @@ struct FootballSelectionSummaryView: View {
                     .foregroundColor(.white.opacity(0.9))
             }
             
-            // 3. 오른쪽: 초기화(변경) 버튼 영역
             Button(action: onResetTap) {
                 ZStack {
                     Circle()
                         .fill(Color.white)
                         .frame(width: 24, height: 24)
                     
-                    Image(systemName: "arrow.down")
+                    Image(systemName: "arrow.trianglehead.counterclockwise")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundColor(team.color) 
                 }

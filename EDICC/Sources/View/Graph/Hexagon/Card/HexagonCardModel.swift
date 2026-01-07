@@ -9,10 +9,10 @@ import SwiftUI
 
 @Observable
 class HexagonCardModel {
-    var chart: HexagonChartModel
+    var chart = HexagonChartModel()
     var selectedDataSet: HexagonDataSet?
     
-    init(chart: HexagonChartModel = .mock()) {
+    init(chart: HexagonChartModel) {
         self.chart = chart
     }
     

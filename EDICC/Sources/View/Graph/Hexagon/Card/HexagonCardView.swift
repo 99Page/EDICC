@@ -35,6 +35,7 @@ struct HexagonCardView<SheetItem: HexagonUpdatable, SheetContent: View>: View {
                     secondary: $vm.model.chart.secondary,
                     onLegendSelected: vm.selectLegend,
                 )
+                .padding(.horizontal, 40)
                 
                 HexagonStatsTableView(model: vm.model)
                     .padding(.top, 16)
