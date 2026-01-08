@@ -72,7 +72,7 @@ class FootballTeamSelectModel {
     var selectedTeam: EPLTeam? = nil
     var selectedSeason: Int? = nil
     
-    var availableSeasons: [Int] = [2023, 2022, 2021]
+    var availableSeasons: [Int] = [2024, 2023, 2022]
     
     var isSeansonTeamSelected: Bool {
         selectedTeam != nil && selectedSeason != nil

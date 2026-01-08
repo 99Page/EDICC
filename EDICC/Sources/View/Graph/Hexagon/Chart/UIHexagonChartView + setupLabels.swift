@@ -49,9 +49,11 @@ extension UIHexagonChartView {
     private func layoutLabel(_ label: UILabel, at targetPoint: CGPoint, center centerPoint: CGPoint) {
         let tolerance: CGFloat = 5.0
         let xDistance = abs(targetPoint.x - centerPoint.x)
+        let screenMargin: CGFloat = 10.0 // 화면 가장자리 여백
         
         label.snp.remakeConstraints { make in
-            make.width.equalTo(60)
+            make.left.greaterThanOrEqualToSuperview().offset(screenMargin)
+            make.right.lessThanOrEqualToSuperview().offset(-screenMargin)
             
             let isOnVerticalAxis = xDistance <= tolerance
             
