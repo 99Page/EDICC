@@ -20,8 +20,12 @@ class HexagonChartModel {
         !primary.points.isEmpty && !secondary.points.isEmpty
     }
     
+    // primary, secondary 양쪽 모두에 공통적으로 있는 label 사용
     var axisLabels: [String] {
-        return primary.points.map { $0.label }
+        let primaryLabels = primary.points.map { $0.label }
+        let secondaryLabelSet = Set(secondary.points.map { $0.label })
+        
+        return primaryLabels.filter { secondaryLabelSet.contains($0) }
     }
     
     init() { }

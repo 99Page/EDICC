@@ -3,7 +3,6 @@ import SwiftUI
 @Observable
 class HexagonCardViewModel {
     var model: HexagonCardModel
-    
     var legendSelected: ((HexagonDataSet) -> Void)?
     
     init(model: HexagonCardModel) {
@@ -37,7 +36,10 @@ struct HexagonCardView<SheetItem: HexagonUpdatable, SheetContent: View>: View {
                 )
                 .padding(.horizontal, 40)
                 
-                HexagonStatsTableView(model: vm.model)
+                HexagonStatsTableView(
+                    model: vm.model,
+                    onLegendSelected: vm.selectLegend
+                )
                     .padding(.top, 16)
                     .padding(.horizontal, 16)
             }

@@ -12,7 +12,7 @@ class HexagonCardModel {
     var chart = HexagonChartModel()
     var selectedDataSet: HexagonDataSet?
     
-    init(chart: HexagonChartModel) {
+    init(chart: HexagonChartModel = HexagonChartModel()) {
         self.chart = chart
     }
     

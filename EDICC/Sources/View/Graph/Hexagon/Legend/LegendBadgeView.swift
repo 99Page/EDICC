@@ -43,6 +43,7 @@ private extension ChartLegendView {
             color: color,
             title: dataSet.label
         )
+        .frame(maxWidth: .infinity)
         .contentShape(Rectangle())
         .onTapGesture {
             onLegendSelected(dataSet)

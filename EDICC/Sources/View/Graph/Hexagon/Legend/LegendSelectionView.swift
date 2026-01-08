@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LegendSelectionView<LegendView: View>: View {
     
+    @State private var currentDetent: PresentationDetent = .medium
     @Binding var color: Color
     
     let bannedColor: Set<IdentifiableColor>
@@ -18,18 +19,22 @@ struct LegendSelectionView<LegendView: View>: View {
     var body: some View {
         ScrollView {
             VStack {
-                ColorSelectionView(
-                    selectedColor: $color,
-                    theme: .chart,
-                    bannedColor: bannedColor
-                )
+                if currentDetent != .large {
+                    ColorSelectionView(
+                        selectedColor: $color,
+                        theme: .chart,
+                        bannedColor: bannedColor
+                    )
+                    .transition(.opacity.combined(with: .move(edge: .top)))
+                }
                 
                 legendView()
             }
             .padding(.all)
         }
         .presentationDragIndicator(.visible)
-        .presentationDetents([.medium, .large])
+        .presentationDetents([.medium, .large], selection: $currentDetent)
+        .animation(.spring, value: currentDetent)
     }
 }
 

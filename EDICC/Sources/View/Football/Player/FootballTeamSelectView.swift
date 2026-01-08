@@ -15,18 +15,18 @@ class FootballTeamSelectViewModel: Identifiable, HexagonUpdatable {
     var squadVM: FootballSquadViewModel?
     
     var hexagonTarget: HexagonDataSet
+    var hexagonModel: HexagonCardModel
     
     private var footballService: FootballService
-    var onLegendChanged: (HexagonDataSet, HexagonDataSet) -> Void
     
     init(
         hexagonTarget: HexagonDataSet,
-        footballService: FootballService = .live,
-        legendChanged: @escaping (HexagonDataSet, HexagonDataSet) -> Void
+        hexagonModel: HexagonCardModel,
+        footballService: FootballService = .live
     ) {
         self.hexagonTarget = hexagonTarget
+        self.hexagonModel = hexagonModel
         self.footballService = footballService
-        self.onLegendChanged = legendChanged
     }
     
     func tapResetButton() {
@@ -72,7 +72,7 @@ class FootballTeamSelectModel {
     var selectedTeam: EPLTeam? = nil
     var selectedSeason: Int? = nil
     
-    var availableSeasons: [Int] = [2023, 2022, 2021]
+    var availableSeasons: [Int] = [2024, 2023, 2022]
     
     var isSeansonTeamSelected: Bool {
         selectedTeam != nil && selectedSeason != nil
@@ -246,13 +246,17 @@ struct TeamData: Identifiable {
 // Team -> Season -> 재선택 -> 동일 팀 선택 시 시즌 화면이 이상한 곳에서부터 시작되는 문제가 있으나
 // 프리뷰에서만 발생 -2024. 12. 24
 #Preview {
+    @Previewable @State var cardModel = HexagonCardModel(chart: HexagonChartModel())
+    
     ScrollView {
         FootballTeamSelectView(
             vm: FootballTeamSelectViewModel(
                 hexagonTarget: .mockAverage(),
+                hexagonModel: cardModel,
                 footballService: .preview
-            ) { _, _ in }
+            ) 
         )
         .padding(.horizontal)
     }
 }
+

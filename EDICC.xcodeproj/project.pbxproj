@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,7 +34,6 @@
 		55293652F69DD49FEE0F494B /* SeasonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BB9C2EA78014CC590CAB6 /* SeasonSelectView.swift */; };
 		57C78B2D7CF1549C7D5082BC /* PlayerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFA07036554274DC3FFBDE7E /* PlayerCard.swift */; };
 		5987103B191408C8CADDF16F /* AxisDefinable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4281FD93019326978B561500 /* AxisDefinable.swift */; };
-		6227FD1CD1E3C5B502A9A299 /* Assets 2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F65B61B55832987EF9D0DA4A /* Assets 2.xcassets */; };
 		62D24DA8A7E5AC7FB827ABB2 /* UIHexagonChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FCD42F7C9A5E25EDA9B7F /* UIHexagonChartView.swift */; };
 		6A5DBAEE6E0013024FEDA3DA /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797D6BF2A70140B20EEF0F27 /* Country.swift */; };
 		704658F0592BE5FACD04BEF9 /* RapidPagingDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93001E5DC14D0A6082AB1117 /* RapidPagingDTO.swift */; };
@@ -136,7 +135,6 @@
 		E05A322E2D04BB1097249575 /* HexagonCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexagonCardModel.swift; sourceTree = "<group>"; };
 		E0AA67CA67B986598A751745 /* EDICC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EDICC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EPLTeam.swift; sourceTree = "<group>"; };
-		F65B61B55832987EF9D0DA4A /* Assets 2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Assets 2.xcassets"; sourceTree = "<group>"; };
 		F92D56C47D4B5F72EE477DA9 /* FootballSelectionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSelectionSummaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				B52176D11F7531728EF67B0E /* Preview Content */,
-				F65B61B55832987EF9D0DA4A /* Assets 2.xcassets */,
 				26360919DCFD0EDCB5C6D738 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -538,7 +535,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6227FD1CD1E3C5B502A9A299 /* Assets 2.xcassets in Resources */,
 				71952B550F2066EEE89F8D6C /* Assets.xcassets in Resources */,
 				023753A10971410ACC3E19FD /* Preview Assets.xcassets in Resources */,
 			);
@@ -635,10 +631,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -777,10 +770,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

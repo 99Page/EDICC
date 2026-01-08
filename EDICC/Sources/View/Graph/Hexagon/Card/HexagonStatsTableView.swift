@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HexagonStatsTableView: View {
     @Bindable var model: HexagonCardModel
+    var onLegendSelected: (HexagonDataSet) -> Void
     
     var body: some View {
         VStack(spacing: 0) {
@@ -31,7 +32,7 @@ struct HexagonStatsTableView: View {
                         }
                         .gridColumnAlignment(.trailing)
                         .onTapGesture {
-                            model.selectedDataSet = dataSet
+                            onLegendSelected(dataSet)
                         }
                     }
                 }
@@ -75,8 +76,6 @@ struct HexagonStatsTableView: View {
 #Preview {
     @Previewable @State var model = HexagonCardModel(chart: HexagonChartModel())
     
-    HexagonStatsTableView(
-        model: model
-    )
-    .padding(.horizontal)
+    HexagonStatsTableView(model: model) { _ in }
+        .padding(.horizontal)
 }
