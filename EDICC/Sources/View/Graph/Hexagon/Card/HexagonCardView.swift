@@ -67,5 +67,5 @@ struct HexagonCardView<SheetItem: HexagonUpdatable, SheetContent: View>: View {
 
 
 #Preview {
-    FootballHexagonCardView()
+    FootballHexagonCardView(vm: FootballHexagonCardViewModel(chart: .init()))
 }

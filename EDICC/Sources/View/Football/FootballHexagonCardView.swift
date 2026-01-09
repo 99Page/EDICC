@@ -45,7 +45,7 @@ class FootballHexagonCardViewModel {
 
 struct FootballHexagonCardView: View {
     
-    @State private var vm = FootballHexagonCardViewModel(chart: HexagonChartModel())
+    @Bindable var vm: FootballHexagonCardViewModel
     
     var body: some View {
         HexagonCardView(legendVM: $vm.teamSelectVM, vm: vm.hexagonVM) { vm in
@@ -55,5 +55,5 @@ struct FootballHexagonCardView: View {
 }
 
 #Preview {
-    FootballHexagonCardView()
+    FootballHexagonCardView(vm: FootballHexagonCardViewModel(chart: .init()))
 }

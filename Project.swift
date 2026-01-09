@@ -6,6 +6,10 @@ let project = Project(
         .remote(
             url: "https://github.com/SnapKit/SnapKit.git",
             requirement: .upToNextMajor(from: "5.7.1")
+        ),
+        .remote(
+            url: "https://github.com/pointfreeco/swift-composable-architecture.git",
+            requirement: .upToNextMajor(from: "1.23.1")
         )
         ],
     targets: [
@@ -27,7 +31,8 @@ let project = Project(
             sources: ["EDICC/Sources/**"],
             resources: ["EDICC/Resources/**"],
             dependencies: [
-                .package(product: "SnapKit")
+                .package(product: "SnapKit"),
+                .package(product: "ComposableArchitecture")
             ],
             settings: .settings(
                 base: [

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -45,6 +45,7 @@
 		9E3D03CE65D8B23E30A0CD72 /* Array +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0CDC8E68C125019ECB3AE1 /* Array +.swift */; };
 		A32287AA24EBDE3A89E1B8ED /* FootballPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E4863A23BD5F36373B3617C /* FootballPosition.swift */; };
 		AA17DDFFA3CE165FEC28380E /* ColorSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D92B35C1A627B4E22770CAD /* ColorSelectionView.swift */; };
+		ADBF7543347E9FECDA0C2D5F /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = A27D81425CADED4A7FBB1B15 /* ComposableArchitecture */; };
 		BD505F0E9BDD4636499C3CAF /* Pagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD0ECF424CD74BCC1B37414 /* Pagination.swift */; };
 		CBDFE6221B8BA96E5F87FCE2 /* EPLTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C0223ACCC2FA64A498B71D /* EPLTeam.swift */; };
 		D8FADB337F375BE1A4992633 /* FootballLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543F27763DDFCE46B980AD20 /* FootballLeague.swift */; };
@@ -138,12 +139,17 @@
 		F92D56C47D4B5F72EE477DA9 /* FootballSelectionSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballSelectionSummaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BFB9F5AE2F0FC8C700EE9FBB /* Root */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Root; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		3D5F7C1CEC3DB5CC40A891BC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1184CF9083C078BC1A155029 /* SnapKit in Frameworks */,
+				ADBF7543347E9FECDA0C2D5F /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +441,7 @@
 		FF61D22A254B18F8877746BC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				BFB9F5AE2F0FC8C700EE9FBB /* Root */,
 				95A10F205FE5624A29E5BEDB /* Color */,
 				9FDA799E1477A815E9BAE763 /* Football */,
 				23D09284E8BDFDACD83F1C31 /* Graph */,
@@ -480,9 +487,13 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				BFB9F5AE2F0FC8C700EE9FBB /* Root */,
+			);
 			name = EDICC;
 			packageProductDependencies = (
 				016CFC1E4EBC4027AA45AB9B /* SnapKit */,
+				A27D81425CADED4A7FBB1B15 /* ComposableArchitecture */,
 			);
 			productName = EDICC;
 			productReference = E0AA67CA67B986598A751745 /* EDICC.app */;
@@ -512,6 +523,7 @@
 			mainGroup = C0324E316A2FAB10EEB84A4C;
 			packageReferences = (
 				7D5408E48CC3E7C78BEF7E2E /* XCRemoteSwiftPackageReference "SnapKit" */,
+				31D10D141A79E0C2E496571F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = C2BE472BDAC040E2E423ACD2 /* Products */;
 			projectDirPath = "";
@@ -866,6 +878,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		31D10D141A79E0C2E496571F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.23.1;
+			};
+		};
 		7D5408E48CC3E7C78BEF7E2E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -880,6 +900,10 @@
 		016CFC1E4EBC4027AA45AB9B /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SnapKit;
+		};
+		A27D81425CADED4A7FBB1B15 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableArchitecture;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
